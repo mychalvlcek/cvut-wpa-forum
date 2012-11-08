@@ -2,56 +2,56 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.cvut.kbss.bookstore.service;
+package cz.cvut.wpa.forum.service;
 
-import cz.cvut.kbss.bookstore.bo.Book;
-import cz.cvut.kbss.bookstore.bo.User;
-import cz.cvut.kbss.bookstore.dto.BookDto;
-import cz.cvut.kbss.bookstore.helper.HibernateTools;
+import cz.cvut.wpa.forum.bo.Post;
+import cz.cvut.wpa.forum.bo.User;
+import cz.cvut.wpa.forum.dto.PostDto;
+import cz.cvut.wpa.forum.helper.HibernateTools;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
  *
- * @author mickapa1
+ * @author vlcekmi3
  */
 @Component
-public class BookServiceImpl extends AbstractDataAccessService implements BookService{
+public class PostServiceImpl extends AbstractDataAccessService implements PostService {
 
     @Override
-    public List<BookDto> getAllBooks(){
-        List<Book> books = genericDao.getAll(Book.class);
-        List<BookDto> bookDtos = new ArrayList<BookDto>();
+    public List<PostDto> getAllPosts(){
+        List<Post> posts = genericDao.getAll(Post.class);
+        List<PostDto> postDtos = new ArrayList<PostDto>();
         
-        for(Book b : books){
-            bookDtos.add(new BookDto(b.getId(), b.getTitle(), b.getId()));
+        for(Post p : posts){
+            postDtos.add(new PostDto(p.getId(), p.getTitle(), p.getId()));
         }
-        return bookDtos;        
+        return postDtos;        
     }
     @Override
-    public List<BookDto> getUsersBooks(Long userId){
-        List<Book> books = genericDao.getByProperty("owner", genericDao.loadById(userId, User.class), Book.class);
-        List<BookDto> bookDtos = new ArrayList<BookDto>();
+    public List<PostDto> getUsersPosts(Long userId){
+        List<Post> posts = genericDao.getByProperty("author", genericDao.loadById(userId, User.class), Post.class);
+        List<PostDto> postDtos = new ArrayList<PostDto>();
         
-        for(Book b : books){
-            bookDtos.add(new BookDto(b.getId(), b.getTitle(), HibernateTools.getIdentifier(b.getOwner())));
+        for(Post p : posts){
+            postDtos.add(new PostDto(p.getId(), p.getTitle(), HibernateTools.getIdentifier(p.getAuthor())));
         }
-        return bookDtos;        
+        return postDtos;        
     }
 
     @Override
-    public Long addBook(String title, Long owner) {
-        Book newBook = new Book();
-        newBook.setTitle(title);
-        newBook.setOwner(genericDao.loadById(owner, User.class));
+    public Long addPost(String title, Long author) {
+        Post newPost = new Post();
+        newPost.setTitle(title);
+        newPost.setAuthor(genericDao.loadById(author, User.class));
         
-        return genericDao.saveOrUpdate(newBook).getId();
+        return genericDao.saveOrUpdate(newPost).getId();
     }
 
 
     @Override
-    public void deleteBook(Long bookId) {
-        genericDao.removeById(bookId, Book.class);
+    public void deletePost(Long postId) {
+        genericDao.removeById(postId, Post.class);
     }
 }

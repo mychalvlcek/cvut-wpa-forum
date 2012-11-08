@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.cvut.kbss.bookstore.helper;
+package cz.cvut.wpa.forum.helper;
 
-import cz.cvut.kbss.bookstore.bo.AbstractBusinessObject;
+import cz.cvut.wpa.forum.bo.AbstractBusinessObject;
 import org.hibernate.proxy.HibernateProxy;
 
 

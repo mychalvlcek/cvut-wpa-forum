@@ -1,10 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.cvut.kbss.bookstore.service;
+package cz.cvut.wpa.forum.service;
 
-import cz.cvut.kbss.bookstore.dto.BookDto;
+import cz.cvut.wpa.forum.service.UserService;
+import cz.cvut.wpa.forum.service.PostService;
+import cz.cvut.wpa.forum.dto.PostDto;
 import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -15,46 +13,44 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author mickapa1
+ * @author vlcekmi3
  */
-public class BookServiceImplTest extends AbstractServiceTest {
-
+public class PostServiceImplTest extends AbstractServiceTest {
     @Autowired
-    private BookService bookService;
+    private PostService postService;
     @Autowired
     private UserService userService;
 
-    public BookServiceImplTest() {
+    public PostServiceImplTest() {
         super();
     }
 
     @Test
-    public void testAddAndRetrieveBook() {
-
+    public void testAddAndRetrievePost() {
         Long userId = addUser();
 
         String title = "Bob a Bobek, kralici z klobouku";
 
-        Long bookId = bookService.addBook(title, userId);
-        List<BookDto> books = bookService.getUsersBooks(userId);
-        assertEquals(1, books.size());
+        Long postId = postService.addPost(title, userId);
+        List<PostDto> posts = postService.getUsersPosts(userId);
+        assertEquals(1, posts.size());
 
-        BookDto book = books.get(0);
+        PostDto post = posts.get(0);
 
-        assertEquals(title, book.getTitle());
-        assertEquals(userId, book.getOwner());
-        assertEquals(bookId, book.getId());
+        assertEquals(title, post.getTitle());
+        assertEquals(userId, post.getAuthor());
+        assertEquals(postId, post.getId());
     }
 
     @Test
-    public void testAddAndRemoveBook() {
+    public void testAddAndRemovePost() {
         Long userId = addUser();
         
         String title = "Bob a Bobek, kralici z klobouku";
-        Long bookId = bookService.addBook(title, userId);
-        assertEquals(1, bookService.getAllBooks().size());
-        bookService.deleteBook(bookId);
-        assertEquals(0, bookService.getAllBooks().size());
+        Long bookId = postService.addPost(title, userId);
+        assertEquals(1, postService.getAllPosts().size());
+        postService.deletePost(bookId);
+        assertEquals(0, postService.getAllPosts().size());
     }
     
     @Test
@@ -62,19 +58,18 @@ public class BookServiceImplTest extends AbstractServiceTest {
         Long userId = addUser();
         
         String title = "Bob a Bobek, kralici z klobouku";
-        bookService.addBook(title, userId);
-        assertEquals(1, bookService.getAllBooks().size());
+        postService.addPost(title, userId);
+        assertEquals(1, postService.getAllPosts().size());
         
         userService.deleteUser(userId);    
-        assertEquals(0, bookService.getAllBooks().size());
-        
+        assertEquals(0, postService.getAllPosts().size());
     }
 
     private long addUser() {
         String userName = "UserName" + System.currentTimeMillis();
         String passwd = "passwd" + System.currentTimeMillis();
-        int age = 18;
+        String email = "email@email.com";
 
-        return userService.addUser(userName, passwd, age);
+        return userService.addUser(userName, passwd, email);
     }
 }

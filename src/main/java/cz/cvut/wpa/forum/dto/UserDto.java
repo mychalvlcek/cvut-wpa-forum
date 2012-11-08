@@ -2,39 +2,34 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.cvut.kbss.bookstore.dto;
-
+package cz.cvut.wpa.forum.dto;
 import java.util.List;
 
 /**
  *
- * @author mickapa1
+ * @author vlcekmi3
  */
 public class UserDto extends AbstractDto{
     private String userName;
-    private int age;
-    private List<Long> books;
+    private String email;
+    private List<Long> posts;
 
     public UserDto() {
     }
-    
-    
 
-    public UserDto(Long id, String userName, int age, List<Long> books) {
+    public UserDto(Long id, String userName, String email, List<Long> posts) {
         this.id = id;
-        this.age = age;
+        this.email = email;
         this.userName = userName;
-        this.books = books;
+        this.posts = posts;
     }
 
-    
-    
-    public List<Long> getBooks() {
-        return books;
+    public List<Long> getPosts() {
+        return posts;
     }
 
-    public void setBooks(List<Long> books) {
-        this.books = books;
+    public void setPosts(List<Long> posts) {
+        this.posts = posts;
     }
 
     public String getUserName() {
@@ -45,14 +40,12 @@ public class UserDto extends AbstractDto{
         this.userName = userName;
     }
 
-    public int getAge() {
-        return age;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setEmail(String email) {
+        this.email = email;
     }
-    
-    
     
 }

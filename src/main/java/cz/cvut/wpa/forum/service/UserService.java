@@ -1,16 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.cvut.kbss.bookstore.service;
+package cz.cvut.wpa.forum.service;
 
-import cz.cvut.kbss.bookstore.dto.UserDto;
+import cz.cvut.wpa.forum.dto.UserDto;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author mickapa1
+ * @author vlcekmi3
  */
 @Transactional
 public interface UserService {
@@ -19,10 +15,10 @@ public interface UserService {
      * Add user to the system
      * @param userName username
      * @param password password as an open text (will be stored in hashed form)
-     * @param age age of the user
+     * @param email email of the user
      * @return identifier of the user stored
      */
-    public Long addUser(String userName, String password, int age);
+    public Long addUser(String userName, String password, String email);
 
     /**
      * Permanently removes the user

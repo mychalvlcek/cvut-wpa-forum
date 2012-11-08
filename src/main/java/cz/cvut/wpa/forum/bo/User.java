@@ -1,38 +1,41 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.cvut.kbss.bookstore.bo;
+package cz.cvut.wpa.forum.bo;
 
-import cz.cvut.kbss.bookstore.provider.HashProvider;
+import cz.cvut.wpa.forum.provider.HashProvider;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
 /**
- * Entity, which represents user of the system
- * @author mickapa1
+ * Entity, which represents user of the system.
+ * User: username, password, email
+ * @author vlcekmi3
  */
 @Entity
 @Table(name = "users") //user je SQL klicove slovo, nejde ho pouzit po pojmenovani tabulky
 @Configurable(preConstruction=true)
 public class User extends AbstractBusinessObject {
 
-    @Column(nullable = false)
+    @Column(length = 255, unique = true, nullable = false)
     private String userName; //max 255 chars
     @Column(length = 40, nullable = false) //40 je hash od SHA1
-    private String salt;
-    @Column(length = 40, nullable = false) //40 je hash od SHA1
     private String password;
-    private int age; //vse, co neni oanotovano a neni transient, je @Column
-    @OneToMany(mappedBy="owner", cascade=CascadeType.REMOVE)
-    private List<Book> books;
+    @Column(length = 40, nullable = false) //40 je hash od SHA1
+    private String salt;
+    @Column(nullable = false)
+    private String email;
+    @ManyToMany
+    private Set<Role> roles = new HashSet<Role>();
+    @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE)
+    private List<Post> posts;
     @Autowired
     private transient HashProvider hashProvider; //transient fields are not persisted
 
@@ -43,36 +46,33 @@ public class User extends AbstractBusinessObject {
     public void setHashProvider(HashProvider hashProvider) {
         this.hashProvider = hashProvider;
     }
-
-    public List<Book> getBooks() {
-        return books;
+    
+    public boolean addRole(Role role) {
+        return roles.add(role);
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
     /**
-     * Add a book to the list of users book, if not present
-     * @param book book to be added
+     * Add a post to the list of users posts, if not present
+     * @param post post to be added
      */
-    public void addBook(Book book){
-        if(this.books == null){
-            books = new ArrayList<Book>();
+    public void addPost(Post post){
+        if(this.posts == null){
+            posts = new ArrayList<Post>();
         }
-        if(!this.books.contains(book)){
-            books.add(book);
+        if(!this.posts.contains(post)){
+            posts.add(post);
         }
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        if (age < 0) {
-            throw new IllegalArgumentException("Negative age");
-        }
-        this.age = age;
     }
 
     public String getPassword() {
@@ -98,5 +98,13 @@ public class User extends AbstractBusinessObject {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

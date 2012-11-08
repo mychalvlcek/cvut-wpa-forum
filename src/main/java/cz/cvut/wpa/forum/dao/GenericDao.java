@@ -1,6 +1,6 @@
-package cz.cvut.kbss.bookstore.dao;
+package cz.cvut.wpa.forum.dao;
 
-import cz.cvut.kbss.bookstore.bo.AbstractBusinessObject;
+import cz.cvut.wpa.forum.bo.AbstractBusinessObject;
 import java.util.List;
 
 /**

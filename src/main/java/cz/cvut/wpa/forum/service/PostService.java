@@ -1,42 +1,38 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.cvut.kbss.bookstore.service;
+package cz.cvut.wpa.forum.service;
 
-import cz.cvut.kbss.bookstore.dto.BookDto;
+import cz.cvut.wpa.forum.dto.PostDto;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author mickapa1
+ * @author vlcekmi3
  */
 @Transactional
-public interface BookService {
+public interface PostService {
     /**
-     * Get all books stored in the system
+     * Get all posts stored in the system
      * @return 
      */
     @Transactional(readOnly=true)
-    public List<BookDto> getAllBooks();
+    public List<PostDto> getAllPosts();
     /**
-     * Get all books owned by the given user
+     * Get all posts written by the given user
      * @param userId identifier of the user
-     * @return users books
+     * @return users posts
      */
     @Transactional(readOnly=true)
-    public List<BookDto> getUsersBooks(Long userId);
+    public List<PostDto> getUsersPosts(Long userId);
     /**
-     * Add book to the system
-     * @param title title of the book
-     * @param owner id of the owner
-     * @return identifier of the newly added book
+     * Add post to the system
+     * @param title title of the post
+     * @param author id of the author
+     * @return identifier of the newly added post
      */
-    public Long addBook(String title, Long owner);
+    public Long addPost(String title, Long author);
     /**
-     * Deletes book from the system
-     * @param bookId idenfier of the book to be removed
+     * Deletes post from the system
+     * @param postId idenfier of the post to be removed
      */
-    public void deleteBook(Long bookId);
+    public void deletePost(Long postId);
 }

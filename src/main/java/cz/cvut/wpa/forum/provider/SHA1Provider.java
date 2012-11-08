@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.cvut.kbss.bookstore.provider;
+package cz.cvut.wpa.forum.provider;
 
 import java.security.MessageDigest;
 import org.springframework.stereotype.Component;

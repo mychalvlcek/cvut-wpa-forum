@@ -1,22 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cz.cvut.kbss.bookstore.service;
+package cz.cvut.wpa.forum.service;
 
-import cz.cvut.kbss.bookstore.bo.User;
-import cz.cvut.kbss.bookstore.dto.UserDto;
-import cz.cvut.kbss.bookstore.helper.DtoTransformerHelper;
+import cz.cvut.wpa.forum.bo.User;
+import cz.cvut.wpa.forum.dto.UserDto;
+import cz.cvut.wpa.forum.helper.DtoTransformerHelper;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
  *
- * @author mickapa1
+ * @author vlcekmi3
  */
 @Component
-public class UserServiceImpl extends AbstractDataAccessService implements UserService{
+public class UserServiceImpl extends AbstractDataAccessService implements UserService {
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -24,15 +20,15 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
         List<UserDto> userDtos = new ArrayList<UserDto>();
 
         for (User u : users) {
-            userDtos.add(new UserDto(u.getId(), u.getUserName(), u.getAge(), DtoTransformerHelper.getIdentifiers(u.getBooks())));
+            userDtos.add(new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getPosts())));
         }
         return userDtos;
     }
 
     @Override
-    public Long addUser(String userName, String password, int age) {
+    public Long addUser(String userName, String password, String email) {
         User newUser = new User();
-        newUser.setAge(age);
+        newUser.setEmail(email);
         newUser.setPassword(password);
         newUser.setUserName(userName);
 
@@ -47,6 +43,6 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
     @Override
     public UserDto getUserById(Long id) {
         User u = genericDao.getByPropertyUnique("id", id, User.class);
-        return new UserDto(u.getId(), u.getUserName(), u.getAge(), DtoTransformerHelper.getIdentifiers(u.getBooks()));
+        return new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getPosts()));
     }
 }

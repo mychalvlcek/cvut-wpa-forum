@@ -1,8 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.cvut.wpa.forum.dto;
+
 import java.util.List;
 
 /**
@@ -12,24 +9,22 @@ import java.util.List;
 public class UserDto extends AbstractDto{
     private String userName;
     private String email;
+    private List<Long> messages;
     private List<Long> posts;
+    private List<Long> topics;
+    private List<Long> roles;
 
     public UserDto() {
     }
 
-    public UserDto(Long id, String userName, String email, List<Long> posts) {
+    public UserDto(Long id, String userName, String email, List<Long> messages, List<Long> posts, List<Long> topics, List<Long> roles) {
         this.id = id;
         this.email = email;
         this.userName = userName;
+        this.messages = messages;
         this.posts = posts;
-    }
-
-    public List<Long> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Long> posts) {
-        this.posts = posts;
+        this.topics = topics;
+        this.roles = roles;
     }
 
     public String getUserName() {
@@ -46,6 +41,38 @@ public class UserDto extends AbstractDto{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Long> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Long> messages) {
+        this.messages = messages;
+    }
+
+    public List<Long> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Long> posts) {
+        this.posts = posts;
+    }
+
+    public List<Long> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Long> topics) {
+        this.topics = topics;
+    }
+
+    public List<Long> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Long> roles) {
+        this.roles = roles;
     }
     
 }

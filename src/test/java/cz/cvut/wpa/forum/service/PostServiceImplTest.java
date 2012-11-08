@@ -1,7 +1,9 @@
 package cz.cvut.wpa.forum.service;
 
-import cz.cvut.wpa.forum.service.UserService;
+import cz.cvut.wpa.forum.service.CategoryService;
 import cz.cvut.wpa.forum.service.PostService;
+import cz.cvut.wpa.forum.service.TopicService;
+import cz.cvut.wpa.forum.service.UserService;
 import cz.cvut.wpa.forum.dto.PostDto;
 import java.util.List;
 import static org.junit.Assert.*;
@@ -17,7 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class PostServiceImplTest extends AbstractServiceTest {
     @Autowired
+    private CategoryService categoryService;
+    @Autowired
     private PostService postService;
+    @Autowired
+    private TopicService topicService;
     @Autowired
     private UserService userService;
 
@@ -28,10 +34,14 @@ public class PostServiceImplTest extends AbstractServiceTest {
     @Test
     public void testAddAndRetrievePost() {
         Long userId = addUser();
+        Long categoryId = addCategory();
+        Long topicId = addTopic(userId, categoryId);
 
-        String title = "Bob a Bobek, kralici z klobouku";
+        String title = "Nadpis";
+        String content = "Obsah";
 
-        Long postId = postService.addPost(title, userId);
+        Long postId = postService.addPost(title, content, userId, topicId);
+        //Long postId = postService.addPost(title, content, userId);
         List<PostDto> posts = postService.getUsersPosts(userId);
         assertEquals(1, posts.size());
 
@@ -45,20 +55,28 @@ public class PostServiceImplTest extends AbstractServiceTest {
     @Test
     public void testAddAndRemovePost() {
         Long userId = addUser();
-        
-        String title = "Bob a Bobek, kralici z klobouku";
-        Long bookId = postService.addPost(title, userId);
+        Long categoryId = addCategory();
+        Long topicId = addTopic(userId, categoryId);
+
+        String title = "Nadpis";
+        String content = "Obsah";
+
+        Long postId = postService.addPost(title, content, userId, topicId);
         assertEquals(1, postService.getAllPosts().size());
-        postService.deletePost(bookId);
+        postService.deletePost(postId);
         assertEquals(0, postService.getAllPosts().size());
     }
     
     @Test
-    public void testBookDeletedWhenUserRemoved(){
+    public void testPostDeletedWhenUserRemoved(){
         Long userId = addUser();
-        
-        String title = "Bob a Bobek, kralici z klobouku";
-        postService.addPost(title, userId);
+        Long categoryId = addCategory();
+        Long topicId = addTopic(userId, categoryId);
+
+        String title = "Nadpis";
+        String content = "Obsah";
+
+        postService.addPost(title, content, userId, topicId);
         assertEquals(1, postService.getAllPosts().size());
         
         userService.deleteUser(userId);    
@@ -71,5 +89,17 @@ public class PostServiceImplTest extends AbstractServiceTest {
         String email = "email@email.com";
 
         return userService.addUser(userName, passwd, email);
+    }
+    
+    private long addCategory() {
+        String title = "Category title";
+        return categoryService.addCategory(title);
+    }
+    
+    private long addTopic(Long userId, Long categoryId) {
+        String title = "Title" + System.currentTimeMillis();
+        Long author = userId;
+        Long category = categoryId;
+        return topicService.addTopic(title, author, category);
     }
 }

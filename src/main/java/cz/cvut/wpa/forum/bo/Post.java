@@ -12,8 +12,11 @@ import javax.persistence.ManyToOne;
 public class Post extends AbstractBusinessObject {
     @Column(nullable = false)
     private String title;
+    private String content;
     @ManyToOne
     private User author;
+    @ManyToOne
+    private Topic topic;
 
     public User getAuthor() {
         return author;
@@ -31,4 +34,22 @@ public class Post extends AbstractBusinessObject {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+        topic.addPost(this);
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
 }

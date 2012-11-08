@@ -11,7 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author mickapa1
  */
 @MappedSuperclass
-public class AbstractBusinessObject implements Serializable{
+public class AbstractBusinessObject implements Serializable {
     @Id
     @GeneratedValue(generator="system-sequence")
     @GenericGenerator(name="system-sequence", strategy = "sequence")    

@@ -29,7 +29,7 @@ public interface PostService {
      * @param author id of the author
      * @return identifier of the newly added post
      */
-    public Long addPost(String title, Long author);
+    public Long addPost(String title, String content, Long author, Long topic);
     /**
      * Deletes post from the system
      * @param postId idenfier of the post to be removed

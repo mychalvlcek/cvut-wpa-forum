@@ -2,9 +2,7 @@ package cz.cvut.wpa.forum.bo;
 
 import cz.cvut.wpa.forum.provider.HashProvider;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +18,7 @@ import org.springframework.beans.factory.annotation.Configurable;
  * @author vlcekmi3
  */
 @Entity
-@Table(name = "users") //user je SQL klicove slovo, nejde ho pouzit po pojmenovani tabulky
+@Table(name = "users") //user je SQL klicove slovo, nejde ho pouzit pro pojmenovani tabulky
 @Configurable(preConstruction=true)
 public class User extends AbstractBusinessObject {
 
@@ -32,10 +30,14 @@ public class User extends AbstractBusinessObject {
     private String salt;
     @Column(nullable = false)
     private String email;
-    @ManyToMany
-    private Set<Role> roles = new HashSet<Role>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    private List<Role> roles;
     @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE)
     private List<Post> posts;
+    @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE)
+    private List<Topic> topics;
+    @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE)
+    private List<Message> messages;
     @Autowired
     private transient HashProvider hashProvider; //transient fields are not persisted
 
@@ -50,18 +52,15 @@ public class User extends AbstractBusinessObject {
     public boolean addRole(Role role) {
         return roles.add(role);
     }
+    
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
+    
     /**
      * Add a post to the list of users posts, if not present
      * @param post post to be added
@@ -74,6 +73,57 @@ public class User extends AbstractBusinessObject {
             posts.add(post);
         }
     }
+    
+    /**
+     * Add a topic to the list of users topics, if not present
+     * @param topic topic to be added
+     */
+    public void addTopic(Topic topic){
+        if(this.topics == null){
+            topics = new ArrayList<Topic>();
+        }
+        if(!this.topics.contains(topic)){
+            topics.add(topic);
+        }
+    }
+    
+    /**
+     * Add a message to the list of users messages, if not present
+     * @param message message to be added
+     */
+    public void addMessage(Message message){
+        if(this.messages == null){
+            messages = new ArrayList<Message>();
+        }
+        if(!this.messages.contains(message)){
+            messages.add(message);
+        }
+    }
+    
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+    
 
     public String getPassword() {
         return password;

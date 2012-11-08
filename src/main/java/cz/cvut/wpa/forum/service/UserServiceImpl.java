@@ -20,7 +20,7 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
         List<UserDto> userDtos = new ArrayList<UserDto>();
 
         for (User u : users) {
-            userDtos.add(new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getPosts())));
+            userDtos.add(new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getMessages()), DtoTransformerHelper.getIdentifiers(u.getPosts()), DtoTransformerHelper.getIdentifiers(u.getTopics()), DtoTransformerHelper.getIdentifiers(u.getRoles())));
         }
         return userDtos;
     }
@@ -43,6 +43,6 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
     @Override
     public UserDto getUserById(Long id) {
         User u = genericDao.getByPropertyUnique("id", id, User.class);
-        return new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getPosts()));
+        return new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getMessages()), DtoTransformerHelper.getIdentifiers(u.getPosts()), DtoTransformerHelper.getIdentifiers(u.getTopics()), DtoTransformerHelper.getIdentifiers(u.getRoles()));
     }
 }

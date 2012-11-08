@@ -2,30 +2,20 @@ package cz.cvut.wpa.forum.dto;
 
 /**
  *
- * @author vlcekmi3
+ * @author WolF
  */
-public class PostDto extends AbstractDto {
+public class MessageDto extends AbstractDto {
     private String title;
     private String content;
     private Long author;
-    private Long topic;
 
-    public PostDto() {
+    public MessageDto() {
     }
 
-    public PostDto(Long id, String title, String content, Long author, Long topic) {
+    public MessageDto(Long id, String title, String content, Long author) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.author = author;
-        this.topic = topic;
-    }
-
-    public Long getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Long author) {
         this.author = author;
     }
 
@@ -45,12 +35,12 @@ public class PostDto extends AbstractDto {
         this.content = content;
     }
 
-    public Long getTopic() {
-        return topic;
+    public Long getAuthor() {
+        return author;
     }
 
-    public void setTopic(Long topic) {
-        this.topic = topic;
+    public void setAuthor(Long author) {
+        this.author = author;
     }
     
 }

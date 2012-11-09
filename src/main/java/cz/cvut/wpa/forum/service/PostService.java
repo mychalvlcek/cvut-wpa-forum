@@ -11,6 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface PostService {
     /**
+     * Add post to the system
+     * @param title title of the post
+     * @param author id of the author
+     * @return identifier of the newly added post
+     */
+    public Long addPost(String title, String content, Long author, Long topic);
+    /**
+     * Deletes post from the system
+     * @param postId idenfier of the post to be removed
+     */
+    public void deletePost(Long postId);
+    /**
      * Get all posts stored in the system
      * @return 
      */
@@ -23,16 +35,4 @@ public interface PostService {
      */
     @Transactional(readOnly=true)
     public List<PostDto> getUsersPosts(Long userId);
-    /**
-     * Add post to the system
-     * @param title title of the post
-     * @param author id of the author
-     * @return identifier of the newly added post
-     */
-    public Long addPost(String title, String content, Long author, Long topic);
-    /**
-     * Deletes post from the system
-     * @param postId idenfier of the post to be removed
-     */
-    public void deletePost(Long postId);
 }

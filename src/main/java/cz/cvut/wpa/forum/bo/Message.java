@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 public class Message extends AbstractBusinessObject {
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition="TEXT")
     private String content;
     @ManyToOne
     private User author;

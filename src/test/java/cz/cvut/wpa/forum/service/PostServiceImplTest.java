@@ -9,9 +9,6 @@ import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -41,7 +38,6 @@ public class PostServiceImplTest extends AbstractServiceTest {
         String content = "Obsah";
 
         Long postId = postService.addPost(title, content, userId, topicId);
-        //Long postId = postService.addPost(title, content, userId);
         List<PostDto> posts = postService.getUsersPosts(userId);
         assertEquals(1, posts.size());
 
@@ -68,7 +64,7 @@ public class PostServiceImplTest extends AbstractServiceTest {
     }
     
     @Test
-    public void testPostDeletedWhenUserRemoved(){
+    public void testPostDeletedWhenUserRemoved() {
         Long userId = addUser();
         Long categoryId = addCategory();
         Long topicId = addTopic(userId, categoryId);

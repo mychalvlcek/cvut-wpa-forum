@@ -18,17 +18,6 @@ import org.springframework.stereotype.Component;
 public class TopicServiceImpl extends AbstractDataAccessService implements TopicService {
 
     @Override
-    public List<TopicDto> getAllTopics() {
-        List<Topic> topics = genericDao.getAll(Topic.class);
-        List<TopicDto> topicDtos = new ArrayList<TopicDto>();
-
-        for (Topic t : topics) {
-            topicDtos.add(new TopicDto(t.getId(), t.getTitle(), HibernateTools.getIdentifier(t.getAuthor()), HibernateTools.getIdentifier(t.getCategory()) ,DtoTransformerHelper.getIdentifiers(t.getPosts())));
-        }
-        return topicDtos;
-    }
-
-    @Override
     public Long addTopic(String title, Long author, Long category) {
         Topic newTopic = new Topic();
         newTopic.setTitle(title);
@@ -41,6 +30,17 @@ public class TopicServiceImpl extends AbstractDataAccessService implements Topic
     @Override
     public void deleteTopic(Long userId) {
         genericDao.removeById(userId, Topic.class);
+    }
+    
+    @Override
+    public List<TopicDto> getAllTopics() {
+        List<Topic> topics = genericDao.getAll(Topic.class);
+        List<TopicDto> topicDtos = new ArrayList<TopicDto>();
+
+        for (Topic t : topics) {
+            topicDtos.add(new TopicDto(t.getId(), t.getTitle(), HibernateTools.getIdentifier(t.getAuthor()), HibernateTools.getIdentifier(t.getCategory()) ,DtoTransformerHelper.getIdentifiers(t.getPosts())));
+        }
+        return topicDtos;
     }
 
     @Override

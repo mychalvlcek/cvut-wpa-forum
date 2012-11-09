@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.cvut.wpa.forum.service;
 
 import cz.cvut.wpa.forum.bo.Post;
@@ -19,6 +15,23 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PostServiceImpl extends AbstractDataAccessService implements PostService {
+    
+    @Override
+    public Long addPost(String title, String content, Long author, Long topic) {
+        Post newPost = new Post();
+        newPost.setTitle(title);
+        newPost.setContent(content);
+        newPost.setAuthor(genericDao.loadById(author, User.class));
+        newPost.setTopic(genericDao.loadById(topic, Topic.class));
+        
+        return genericDao.saveOrUpdate(newPost).getId();
+    }
+
+
+    @Override
+    public void deletePost(Long postId) {
+        genericDao.removeById(postId, Post.class);
+    }
 
     @Override
     public List<PostDto> getAllPosts() {
@@ -41,20 +54,4 @@ public class PostServiceImpl extends AbstractDataAccessService implements PostSe
         return postDtos;        
     }
 
-    @Override
-    public Long addPost(String title, String content, Long author, Long topic) {
-        Post newPost = new Post();
-        newPost.setTitle(title);
-        newPost.setContent(content);
-        newPost.setAuthor(genericDao.loadById(author, User.class));
-        newPost.setTopic(genericDao.loadById(topic, Topic.class));
-        
-        return genericDao.saveOrUpdate(newPost).getId();
-    }
-
-
-    @Override
-    public void deletePost(Long postId) {
-        genericDao.removeById(postId, Post.class);
-    }
 }

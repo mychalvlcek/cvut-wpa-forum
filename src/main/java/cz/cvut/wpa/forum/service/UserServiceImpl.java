@@ -15,17 +15,6 @@ import org.springframework.stereotype.Component;
 public class UserServiceImpl extends AbstractDataAccessService implements UserService {
 
     @Override
-    public List<UserDto> getAllUsers() {
-        List<User> users = genericDao.getAll(User.class);
-        List<UserDto> userDtos = new ArrayList<UserDto>();
-
-        for (User u : users) {
-            userDtos.add(new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getMessages()), DtoTransformerHelper.getIdentifiers(u.getPosts()), DtoTransformerHelper.getIdentifiers(u.getTopics()), DtoTransformerHelper.getIdentifiers(u.getRoles())));
-        }
-        return userDtos;
-    }
-
-    @Override
     public Long addUser(String userName, String password, String email) {
         User newUser = new User();
         newUser.setEmail(email);
@@ -38,6 +27,17 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
     @Override
     public void deleteUser(Long userId) {
         genericDao.removeById(userId, User.class);
+    }
+    
+    @Override
+    public List<UserDto> getAllUsers() {
+        List<User> users = genericDao.getAll(User.class);
+        List<UserDto> userDtos = new ArrayList<UserDto>();
+
+        for (User u : users) {
+            userDtos.add(new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getMessages()), DtoTransformerHelper.getIdentifiers(u.getPosts()), DtoTransformerHelper.getIdentifiers(u.getTopics()), DtoTransformerHelper.getIdentifiers(u.getRoles())));
+        }
+        return userDtos;
     }
 
     @Override

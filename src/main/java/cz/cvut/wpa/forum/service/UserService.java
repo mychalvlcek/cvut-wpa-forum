@@ -26,17 +26,16 @@ public interface UserService {
      */
     public void deleteUser(Long userId);
     /**
+     * Get all users stored in the system
+     * @return 
+     */
+    @Transactional(readOnly=true)
+    public List<UserDto> getAllUsers();
+    /**
      * Return user with the given id
      * @param id idenfier of the user to be retrieved
      * @return user with the given id, null if the user does not exist
      */
     @Transactional(readOnly=true)
     public UserDto getUserById(Long id);
-
-    /**
-     * Get all users stored in the system
-     * @return 
-     */
-    @Transactional(readOnly=true)
-    public List<UserDto> getAllUsers();
 }

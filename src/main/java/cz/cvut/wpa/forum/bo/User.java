@@ -6,15 +6,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * Entity, which represents user of the system.
- * User: username, password, email
  * @author vlcekmi3
  */
 @Entity
@@ -32,11 +33,12 @@ public class User extends AbstractBusinessObject {
     private String email;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Role> roles;
-    @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
     private List<Post> posts;
-    @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
     private List<Topic> topics;
-    @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="author", fetch=FetchType.LAZY)
+    @OrderBy("created DESC")
     private List<Message> messages;
     @Autowired
     private transient HashProvider hashProvider; //transient fields are not persisted
@@ -65,11 +67,11 @@ public class User extends AbstractBusinessObject {
      * Add a post to the list of users posts, if not present
      * @param post post to be added
      */
-    public void addPost(Post post){
+    public void addPost(Post post) {
         if(this.posts == null){
             posts = new ArrayList<Post>();
         }
-        if(!this.posts.contains(post)){
+        if(!this.posts.contains(post)) {
             posts.add(post);
         }
     }
@@ -78,11 +80,11 @@ public class User extends AbstractBusinessObject {
      * Add a topic to the list of users topics, if not present
      * @param topic topic to be added
      */
-    public void addTopic(Topic topic){
+    public void addTopic(Topic topic) {
         if(this.topics == null){
             topics = new ArrayList<Topic>();
         }
-        if(!this.topics.contains(topic)){
+        if(!this.topics.contains(topic)) {
             topics.add(topic);
         }
     }
@@ -91,11 +93,11 @@ public class User extends AbstractBusinessObject {
      * Add a message to the list of users messages, if not present
      * @param message message to be added
      */
-    public void addMessage(Message message){
-        if(this.messages == null){
+    public void addMessage(Message message) {
+        if(this.messages == null) {
             messages = new ArrayList<Message>();
         }
-        if(!this.messages.contains(message)){
+        if(!this.messages.contains(message)) {
             messages.add(message);
         }
     }
@@ -123,7 +125,6 @@ public class User extends AbstractBusinessObject {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
-    
 
     public String getPassword() {
         return password;

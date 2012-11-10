@@ -16,11 +16,12 @@ import org.springframework.stereotype.Component;
 public class MessageServiceImpl extends AbstractDataAccessService implements MessageService {
     
     @Override
-    public Long addMessage(String title, String content, Long author) {
+    public Long addMessage(String title, String content, Long author, Long recipient) {
         Message newMessage = new Message();
         newMessage.setTitle(title);
         newMessage.setContent(content);
         newMessage.setAuthor(genericDao.loadById(author, User.class));
+        newMessage.setRecipient(genericDao.loadById(recipient, User.class));
         
         return genericDao.saveOrUpdate(newMessage).getId();
     }
@@ -37,17 +38,22 @@ public class MessageServiceImpl extends AbstractDataAccessService implements Mes
         List<MessageDto> messageDtos = new ArrayList<MessageDto>();
         
         for(Message m : messages) {
-            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor())));
+            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient())));
         }
         return messageDtos;        
     }
     @Override
+    public void deleteUsersMessages(Long userId) {
+        genericDao.removeByProperty("author", genericDao.loadById(userId, User.class), Message.class);
+    }
+    @Override
     public List<MessageDto> getUsersMessages(Long userId) {
         List<Message> messages = genericDao.getByProperty("author", genericDao.loadById(userId, User.class), Message.class);
+        //List<Message> InMessages = genericDao.getByProperty("recipient", genericDao.loadById(userId, User.class), Message.class);
         List<MessageDto> messageDtos = new ArrayList<MessageDto>();
         
         for(Message m : messages) {
-            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor())));
+            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient())));
         }
         return messageDtos;        
     }

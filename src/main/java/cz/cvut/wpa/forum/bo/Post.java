@@ -1,11 +1,8 @@
 package cz.cvut.wpa.forum.bo;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * Represents post in the system. Every post must have attached an author

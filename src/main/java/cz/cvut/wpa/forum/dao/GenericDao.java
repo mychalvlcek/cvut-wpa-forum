@@ -27,10 +27,17 @@ public interface GenericDao {
      * @return maxResults entit
      */
     public <ENTITY> List<ENTITY> getPage(int from, int maxResults, Class<ENTITY> clazz);
-
+    
     /**
-     * Odstrani entitu dle jejiho id
-     * @param id entity k odstraneni
+     * Delete all entities by property
+     * @param property the property to select
+     * @param value value of the property
+     * @return
+     */
+    public <ENTITY extends AbstractBusinessObject> void removeByProperty(String property, Object value, Class<ENTITY> clazz);
+    /**
+     * Delete entity identified by id
+     * @param id entity to remove
      */
     public <ENTITY extends AbstractBusinessObject> void removeById(long id, Class<ENTITY> clazz);
 

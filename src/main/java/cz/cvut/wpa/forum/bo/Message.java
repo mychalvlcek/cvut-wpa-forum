@@ -1,7 +1,9 @@
 package cz.cvut.wpa.forum.bo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -16,6 +18,10 @@ public class Message extends AbstractBusinessObject {
     private String content;
     @ManyToOne
     private User author;
+    @ManyToOne
+    private User recipient;
+    @Column
+    private Boolean readed;
 
     public User getAuthor() {
         return author;
@@ -40,6 +46,23 @@ public class Message extends AbstractBusinessObject {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public User getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
+        //recipient.addMessage(this);
+    }
+
+    public Boolean getReaded() {
+        return readed;
+    }
+
+    public void setReaded(Boolean readed) {
+        this.readed = readed;
     }
     
 }

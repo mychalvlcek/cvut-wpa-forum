@@ -8,15 +8,17 @@ public class MessageDto extends AbstractDto {
     private String title;
     private String content;
     private Long author;
+    private Long recipient;
 
     public MessageDto() {
     }
 
-    public MessageDto(Long id, String title, String content, Long author) {
+    public MessageDto(Long id, String title, String content, Long author, Long recipient) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;
+        this.recipient = recipient;
     }
 
     public String getTitle() {
@@ -41,6 +43,14 @@ public class MessageDto extends AbstractDto {
 
     public void setAuthor(Long author) {
         this.author = author;
+    }
+
+    public Long getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(Long recipient) {
+        this.recipient = recipient;
     }
     
 }

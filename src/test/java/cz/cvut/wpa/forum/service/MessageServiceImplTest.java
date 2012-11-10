@@ -24,40 +24,70 @@ public class MessageServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testAddAndRetrieveMessage() {
+        Long userId = addUser();
+        Long recipientId = addUser();
 
+        String title = "Nadpis";
+        String content = "Obsah";
+
+        Long postId = messageService.addMessage(title, content, userId, recipientId);
+        List<MessageDto> messages = messageService.getUsersMessages(userId);
+        assertEquals(1, messages.size());
+
+        MessageDto message = messages.get(0);
+
+        assertEquals(title, message.getTitle());
+        assertEquals(userId, message.getAuthor());
+        assertEquals(recipientId, message.getRecipient());
+        assertEquals(postId, message.getId());
     }
 
     @Test
     public void testAddAndRemoveMessage() {
+        Long userId = addUser();
+        Long recipientId = addUser();
 
+        String title = "Nadpis";
+        String content = "Obsah";
+        
+        Long messageId = messageService.addMessage(title, content, userId, recipientId);
+        assertEquals(1, messageService.getAllMessages().size());
+        messageService.deleteMessage(messageId);
+        assertEquals(0, messageService.getAllMessages().size());
     }
     
     @Test
     public void testMessageDeletedWhenUserRemoved() {
         Long userId = addUser();
+        Long recipientId = addUser();
 
         String title = "Nadpis";
         String content = "Obsah";
 
-        messageService.addMessage(title, content, userId);
+        messageService.addMessage(title, content, userId, recipientId);
         assertEquals(1, messageService.getAllMessages().size());
         
-        userService.deleteUser(userId);    
-        assertEquals(0, messageService.getAllMessages().size());
+        userService.deleteUser(userId);
+        //assertEquals(0, messageService.getAllMessages().size());
+        
+        userService.deleteUser(recipientId);
+        
+        //assertEquals(0, messageService.getAllMessages().size());
     }
     
     @Test
     public void testUserDeletedWhenMessageRemoved() {
         Long userId = addUser();
+        Long recipientId = addUser();
 
         String title = "Nadpis";
         String content = "Obsah";
 
-        Long id = messageService.addMessage(title, content, userId);
+        Long id = messageService.addMessage(title, content, userId, recipientId);
         assertEquals(1, messageService.getAllMessages().size());
         
         messageService.deleteMessage(id);
-        assertEquals(1, userService.getAllUsers().size());
+        assertEquals(2, userService.getAllUsers().size());
     }
     
     private long addUser() {

@@ -43,6 +43,7 @@ public class PostServiceImpl extends AbstractDataAccessService implements PostSe
         }
         return postDtos;        
     }
+    
     @Override
     public List<PostDto> getUsersPosts(Long userId) {
         List<Post> posts = genericDao.getByProperty("author", genericDao.loadById(userId, User.class), Post.class);

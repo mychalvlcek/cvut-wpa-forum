@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface TopicService {
+    
     /**
      * Add topic to the system
      * @param title title
@@ -18,17 +19,20 @@ public interface TopicService {
      * @return identifier of the topic stored
      */
     public Long addTopic(String title, Long author, Long category);
+    
     /**
      * Permanently removes the topic
      * @param topicId id of the topic to be removed
      */
     public void deleteTopic(Long topicId);
+    
     /**
      * Get all topics stored in the system
      * @return 
      */
     @Transactional(readOnly=true)
     public List<TopicDto> getAllTopics();
+    
     /**
      * Return topic with the given id
      * @param id idenfier of the topic to be retrieved
@@ -36,4 +40,5 @@ public interface TopicService {
      */
     @Transactional(readOnly=true)
     public TopicDto getTopicById(Long id);
+    
 }

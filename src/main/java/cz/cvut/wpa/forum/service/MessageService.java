@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface MessageService {
+    
     /**
      * Add message to the system
      * @param title title of the post
@@ -41,4 +42,5 @@ public interface MessageService {
      */
     @Transactional(readOnly=true)
     public List<MessageDto> getUsersMessages(Long userId);
+    
 }

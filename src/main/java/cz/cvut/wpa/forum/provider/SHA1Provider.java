@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
  * @author mickapa1
  */
 @Component("hashProvider")
-public class SHA1Provider implements HashProvider{
+public class SHA1Provider implements HashProvider {
+    
     private static String convertToHex(byte[] data) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < data.length; i++) {
@@ -41,4 +42,5 @@ public class SHA1Provider implements HashProvider{
         sha1hash = md.digest();
         return convertToHex(sha1hash);
     }
+    
 }

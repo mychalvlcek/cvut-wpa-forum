@@ -117,4 +117,5 @@ public interface GenericDao {
      * @return
      */
     public <ENTITY> List<ENTITY> getPage(int first, int rows, String sortBy, boolean ascending, Class<ENTITY> clazz);
+    
 }

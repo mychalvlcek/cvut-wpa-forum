@@ -37,4 +37,5 @@ public interface CategoryService {
      */
     @Transactional(readOnly=true)
     public List<CategoryDto> getAllCategories();
+    
 }

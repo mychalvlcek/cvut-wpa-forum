@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.cvut.wpa.forum.helper;
 
 import cz.cvut.wpa.forum.bo.AbstractBusinessObject;
@@ -13,6 +9,7 @@ import java.util.List;
  * @author mickapa1
  */
 public class DtoTransformerHelper {
+    
     /**
      * Convert list of entities to list of identifiers
      * @param list list to be converted
@@ -29,4 +26,5 @@ public class DtoTransformerHelper {
         }
         return ids;
     }
+    
 }

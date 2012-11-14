@@ -56,6 +56,7 @@ public class GenericHibernateJpaDao implements GenericDao {
 
     public <ENTITY extends AbstractBusinessObject> void removeByProperty(String property, Object value, Class<ENTITY> clazz) {
         String queryString = "DELETE FROM " + clazz.getSimpleName() + " e WHERE e." + property + " = :value";
+        getEntityManager().createQuery(queryString).setParameter("value", value);
     }
 
     @Override

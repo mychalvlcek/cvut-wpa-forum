@@ -2,7 +2,7 @@ package cz.cvut.wpa.forum.dto;
 
 /**
  *
- * @author WolF
+ * @author vlcekmi3
  */
 public class MessageDto extends AbstractDto {
     private String title;

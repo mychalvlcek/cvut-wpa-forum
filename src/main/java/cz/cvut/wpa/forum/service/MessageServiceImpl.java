@@ -55,7 +55,7 @@ public class MessageServiceImpl extends AbstractDataAccessService implements Mes
         for(Message m : messages) {
             messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient())));
         }
-        return messageDtos;        
+        return messageDtos;
     }
 
 }

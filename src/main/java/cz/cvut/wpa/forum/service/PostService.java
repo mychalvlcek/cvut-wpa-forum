@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface PostService {
+    
     /**
      * Add post to the system
      * @param title title of the post
@@ -35,4 +36,5 @@ public interface PostService {
      */
     @Transactional(readOnly=true)
     public List<PostDto> getUsersPosts(Long userId);
+    
 }

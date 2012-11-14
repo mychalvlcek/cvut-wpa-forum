@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.cvut.wpa.forum.helper;
 
 import cz.cvut.wpa.forum.bo.AbstractBusinessObject;
@@ -13,6 +9,7 @@ import org.hibernate.proxy.HibernateProxy;
  * @author Pavel Micka
  */
 public class HibernateTools {
+    
     /**
      * Get id from the proxy of the object without hitting the database
      * @return identifikator objektu
@@ -27,4 +24,5 @@ public class HibernateTools {
         }
         return id;
     }
+    
 }

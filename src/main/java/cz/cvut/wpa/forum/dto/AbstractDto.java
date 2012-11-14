@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.cvut.wpa.forum.dto;
 
 /**
  *
- * @author mickapa1
+ * @author vlcekmi3
  */
 public class AbstractDto {
     protected Long id;
@@ -40,6 +36,5 @@ public class AbstractDto {
         hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
-    
-    
+       
 }

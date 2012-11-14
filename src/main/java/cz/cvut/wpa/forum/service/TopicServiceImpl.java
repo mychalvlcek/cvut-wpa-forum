@@ -48,4 +48,5 @@ public class TopicServiceImpl extends AbstractDataAccessService implements Topic
         Topic t = genericDao.getByPropertyUnique("id", id, Topic.class);
         return new TopicDto(t.getId(), t.getTitle(), HibernateTools.getIdentifier(t.getAuthor()), HibernateTools.getIdentifier(t.getCategory()), DtoTransformerHelper.getIdentifiers(t.getPosts()));
     }
+    
 }

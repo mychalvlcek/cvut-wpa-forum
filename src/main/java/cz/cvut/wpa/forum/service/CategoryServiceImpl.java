@@ -43,4 +43,5 @@ public class CategoryServiceImpl extends AbstractDataAccessService implements Ca
         Category c = genericDao.getByPropertyUnique("id", id, Category.class);
         return new CategoryDto(c.getId(), c.getTitle(), DtoTransformerHelper.getIdentifiers(c.getTopics()));
     }
+    
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="_template.xhtml">
+        
+        <ui:define name="title">Title</ui:define>
+        <ui:define name="content">
+      <h1>Bootstrap starter template</h1>
+      <blockquote>
+          <p class="lead">Use this document as a way to quick start any new project.<br /> All you get is this message and a barebones HTML document.</p>
+          <small>@twitter</small>
+      </blockquote>
+      <h:form>
+            <!--Show all validation messages--> 
+            <h:messages  style="color:red" />
+
+            <!--Show specific message selected by the component ID in the for attribute-->
+            <!--<h:message for="name" style="color:red" /><br/>-->
+            <h:outputLabel value="user name : " for="age"/>
+            <h:inputText label="user name" id="name" value="#{register.name}" required="true" >
+                <f:validateLength maximum="255" />
+            </h:inputText><br/>
+
+            <h:outputLabel value="user age : " for="age"/>
+            <h:inputText id="age" value="#{register.age}" required="false">
+
+                <!--Converter example defined using spring bean and referenced binding attribute-->
+                <!--<f:converter binding="#{ageConverter}"/>-->
+
+                <!--Validator example1 defined using jsf's @FacesValidator and referenced by validatorId.-->
+                <!--<f:validator  validatorId="ageValidator"/>-->
+
+                <!--Validator example2 defined as a spring bean and referenced using the binding attribute.-->
+                <!--<f:validator binding="#{ageValidator2}"/>-->
+            </h:inputText><br/>
+
+            <h:outputLabel value="password : " for="age"/>
+            <h:inputSecret id="pass" value="#{register.password}" required="true"/><br/>
+            <h:commandButton action="#{register.storeUser()}" value="register"/>
+        </h:form>
+      </ui:define>
+    </ui:composition>
+    
+</html>

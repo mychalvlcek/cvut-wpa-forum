@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"/>
+        
+        <title><ui:insert name="title">#{msgs['application.name']}</ui:insert></title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+        <!-- css -->
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="css/bootstrap-responsive.min.css" />
+        <!-- app css -->
+        <h:outputStylesheet name="css/application.css" />
+    </h:head>
+    <h:body>
+    <div id="wrap">
+      <!-- navigation -->
+      <ui:insert name="nav">
+        <ui:include src="_navbar.xhtml"/>
+      </ui:insert>
+      <div class="container">
+        <!-- content -->
+        <ui:insert name="content" />
+        <div id="push"></div>
+      </div>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">WPA - FEL ČVUT @ 2012 <a href="mailto:vlcekmi3@fel.cvut.cz">Michal Vlček</a>.</p>
+      </div>
+    </div>
+    <h:outputScript name="js/jquery.js" />
+    <h:outputScript name="js/bootstrap.min.js" />
+    </h:body>
+</html>

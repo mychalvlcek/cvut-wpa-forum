@@ -10,13 +10,15 @@
     <application>
         <!-- Spring beans mohou byt pouzity jako backing beany -->
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <!-- Nastaveni lokalizaci -->
         <locale-config>
-            <default-locale>cs</default-locale>
-            <supported-locale>en</supported-locale>
-            <supported-locale>cs</supported-locale>
+            <default-locale>cs_CZ</default-locale>
+            <supported-locale>en_US</supported-locale>
+            <supported-locale>cs_CZ</supported-locale>
         </locale-config>
+        <!-- Package kde budou lokalizacni soubory -->
         <resource-bundle>
-            <base-name>cz.cvut.wpa.forum</base-name>
+            <base-name>cz.cvut.wpa.forum.localizations.messages</base-name>
             <var>msgs</var>
         </resource-bundle>
     </application>

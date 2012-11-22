@@ -1,13 +1,33 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h1>Hello World!</h1>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:composition template="_template.xhtml">
+        
+        <ui:define name="title">Title</ui:define>
+        <ui:define name="content">
+            
+        <h1>Bootstrap starter template</h1>
+        <blockquote>
+          <p class="lead">Use this document as a way to quick start any new project.<br /> All you get is this message and a barebones HTML document.</p>
+          <small>@twitter</small>
+        </blockquote>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    </h:body>
+      
+        <address>
+          <strong>Twitter, Inc.</strong><br />
+          795 Folsom Ave, Suite 600<br />
+          San Francisco, CA 94107<br />
+          <abbr title="Phone">P:</abbr> (123) 456-7890
+        </address>
+        <address>
+          <strong>Full Name</strong><br />
+          <a href="mailto:#">first.last@gmail.com</a>
+        </address>
+        
+        </ui:define>
+    </ui:composition>
+
 </html>
 

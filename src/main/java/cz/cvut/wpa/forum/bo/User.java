@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 @Configurable(preConstruction=true)
 public class User extends AbstractBusinessObject {
 
-    @Column(length = 255, unique = true, nullable = false)
+    @Column(length = 60, unique = true, nullable = false)
     private String userName; //max 255 chars
     @Column(length = 40, nullable = false) //40 je hash od SHA1
     private String password;

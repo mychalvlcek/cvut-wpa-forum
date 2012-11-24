@@ -1,5 +1,6 @@
 package cz.cvut.wpa.forum.service;
 
+import cz.cvut.wpa.forum.bo.Role;
 import cz.cvut.wpa.forum.bo.User;
 import cz.cvut.wpa.forum.dto.UserDto;
 import cz.cvut.wpa.forum.helper.DtoTransformerHelper;
@@ -20,7 +21,9 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
         newUser.setEmail(email);
         newUser.setPassword(password);
         newUser.setUserName(userName);
-
+        /* role */
+        //Role role = genericDao.getById(3L, Role.class);        
+        //newUser.addRole(role);
         return genericDao.saveOrUpdate(newUser).getId();
     }
 

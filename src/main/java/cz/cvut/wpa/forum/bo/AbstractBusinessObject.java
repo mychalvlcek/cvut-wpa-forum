@@ -53,6 +53,9 @@ public class AbstractBusinessObject implements Serializable {
         this.updated = updated;
     }
     
+    /**
+     * Updating timestamps before each transaction.
+     */
     @PreUpdate
     @PrePersist
     public void updateTimeStamps() { 

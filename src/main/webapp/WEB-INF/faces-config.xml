@@ -21,6 +21,14 @@
             <base-name>cz.cvut.wpa.forum.localizations.messages</base-name>
             <var>msgs</var>
         </resource-bundle>
+        <!-- Komponenta zajistujici boostrap alerts prepsanim defaultniho rendereru -->
+        <render-kit>
+            <renderer>
+                <component-family>javax.faces.Messages</component-family>
+                <renderer-type>javax.faces.Messages</renderer-type>
+                <renderer-class>cz.cvut.wpa.forum.components.BootstrapMessagesRenderer</renderer-class>
+            </renderer>
+        </render-kit>
     </application>
 
 </faces-config>

@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <meta charset="utf-8"/>
         
@@ -18,23 +19,25 @@
         <h:outputStylesheet name="css/application.css" />
     </h:head>
     <h:body>
-    <div id="wrap">
-      <!-- navigation -->
-      <ui:insert name="nav">
-        <ui:include src="_navbar.xhtml"/>
-      </ui:insert>
-      <div class="container">
-        <!-- content -->
-        <ui:insert name="content" />
-        <div id="push"></div>
-      </div>
-    </div>
-    <div id="footer">
-      <div class="container">
-        <p class="muted credit">WPA - FEL ČVUT @ 2012 <a href="mailto:vlcekmi3@fel.cvut.cz">Michal Vlček</a>.</p>
-      </div>
-    </div>
-    <h:outputScript name="js/jquery.js" />
-    <h:outputScript name="js/bootstrap.min.js" />
+        <div id="wrap">
+            <!-- navigation -->
+            <ui:insert name="nav">
+                <ui:include src="_navbar.xhtml"/>
+            </ui:insert>
+            <div class="container">
+                <!-- alerts -->
+                <h:messages globalOnly="true" class="alert" showDetail="true" showSummary="true" />
+                <!-- content -->
+                <ui:insert name="content" />
+                <div id="push"></div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="container">
+                <p class="muted credit">WPA - FEL ČVUT @ 2012 <a href="mailto:vlcekmi3@fel.cvut.cz">Michal Vlček</a>.</p>
+            </div>
+        </div>
+        <h:outputScript name="js/jquery.js" />
+        <h:outputScript name="js/bootstrap.min.js" />
     </h:body>
 </html>

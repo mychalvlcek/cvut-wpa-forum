@@ -25,7 +25,7 @@ public class Register {
     
     public String storeUser() {
         userService.addUser(getUsername(), getPassword(), getEmail());
-        FacesContext.getCurrentInstance().addMessage("registration_success", new FacesMessage(FacesMessage.SEVERITY_INFO, "Register_success", "Registrace proběhla úspěšně"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Úspěch!", "Registrace proběhla úspěšně."));
         return "index.xhtml";
     }
 

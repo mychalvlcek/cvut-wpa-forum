@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -17,9 +18,9 @@
               <li><a href="#about">#{msgs['navbar.about']}</a></li>
               <li><a href="#contact">#{msgs['navbar.contact']}</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">WebServices <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
+                  <li><a href="/wpa-forum/jersey/a/hello">REST</a></li>
                   <li><a href="#">Another action</a></li>
                   <li><a href="#">Something else here</a></li>
                   <li class="divider"></li>
@@ -34,9 +35,11 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msgs['navbar.userbar']} <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">#{msgs['navbar.profile']}</a></li>
+                    <li><h:link outcome="profile.xhtml" value="#{msgs['navbar.profile']}"/></li>
+                    <li><a href="/wpa-forum/profile.xhtml#dropdown1">Upravit profil</a></li>
+                    <li><a href="/wpa-forum/profile.xhtml#dropdown2">Změna hesla</a></li>
                     <li><a href="#">#{msgs['navbar.login']}</a></li>
-                    <li><h:link outcome="registration.xhtml" value="#{msgs['navbar.register']}"/></li>
+                    <li><h:link outcome="registration.xhtml" title="Registrační formulář" value="#{msgs['navbar.register']}"/></li>
                     <li class="divider"></li>
                     <li><a href="#">#{msgs['navbar.logout']}</a></li>
                   </ul>

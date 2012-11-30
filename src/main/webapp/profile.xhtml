@@ -1,0 +1,125 @@
+<ui:composition template="_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="title">username#{selectedUser.user.userName}</ui:define>
+    <ui:define name="content">
+    <div class="row">
+        <div class="span2">
+            <!--get the user using the request parameter-->
+            <h:graphicImage class="img-polaroid" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="Alternate text" />
+            <h1 style="font-size:1.5em;margin-top:0px;"><h:outputText value="mychalvlcek#{selectedUser.user.userName}"/></h1>
+            <ul class="nav-list" style="list-style-type: none;margin: 0;padding: 0;">
+                <li style="font-weight:bold;"><i class="icon-eye-open"></i> <span class="muted" style="font-weight:200;">status</span> <span class="label label-success">ONLINE</span></li>
+                <li class="divider"></li>
+                <li style="font-weight:bold;"><i class="icon-calendar"></i> <span class="muted" style="font-weight:200;">od</span> 18.12.2012</li>
+                <li style="font-weight:bold;"><i class="icon-bookmark"></i> <span class="muted" style="font-weight:200;">role</span> uživatel</li>
+                <li style="font-weight:bold;"><i class="icon-time"></i> <span class="muted" style="font-weight:200;">členem</span> 1 367 dnů</li>
+                <li class="divider"></li>
+                <li style="font-weight:bold;"><i class="icon-leaf"></i> <strong>1,435</strong> <span class="muted" style="font-weight:200;">bodů</span></li>
+                <li style="font-weight:bold;"><i class="icon-th-list"></i> <strong>13,321</strong> <span class="muted" style="font-weight:200;">příspěvků</span></li>
+            </ul>
+        </div>
+        <div class="span10">
+            <div class="bs-docs-example">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#profile" data-toggle="tab">Profil</a></li>
+              <li class=""><a href="#posts" data-toggle="tab">Poslední příspěvky</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Upravit <i class="icon-wrench"></i> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#dropdown1" data-toggle="tab">@Změna hesla</a></li>
+                  <li><a href="#dropdown2" data-toggle="tab">@Upravit profil</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="profile">
+                <h1>Bootstrap starter template</h1>
+                <blockquote>
+                  <p class="lead">Use this document as a way to quick start any new project.<br /> All you get is this message and a barebones HTML document.</p>
+                  <small>@twitter</small>
+                </blockquote>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <address>
+                  <strong>Twitter, Inc.</strong><br />
+                  795 Folsom Ave, Suite 600<br />
+                  San Francisco, CA 94107<br />
+                  <abbr title="Phone">P:</abbr> (123) 456-7890
+                </address>
+                <address>
+                  <strong>Full Name</strong><br />
+                  <a href="mailto:#" rel="tooltip" title="first tooltip">first.last@gmail.com</a>
+                </address>
+              </div>
+                
+              <div class="tab-pane fade" id="posts">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Téma</th>
+                        <th>Čas</th>
+                        <th>Kategorie</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>14354534</td>
+                        <td><a href="/wpa-forum/topic.xhtml#post">Title of 1st topic</a></td>
+                        <td>2012-12-31 13:34:54</td>
+                        <td>Software</td>
+                      </tr>
+                      <tr>
+                        <td>2342342</td>
+                        <td>Best HW</td>
+                        <td>2012-12-31 13:30:24</td>
+                        <td>Hardware</td>
+                      </tr>
+                      <tr>
+                        <td>14354534</td>
+                        <td>Title of 1st topic</td>
+                        <td>2012-12-31 13:34:54</td>
+                        <td>Software</td>
+                      </tr>
+                      <tr>
+                        <td>3354</td>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                      <tr>
+                        <td>14354534</td>
+                        <td>Title of 1st topic</td>
+                        <td>2012-12-31 13:34:54</td>
+                        <td>Software</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="pagination">
+                    <ul>
+                      <li><a href="#">Prev</a></li>
+                      <li><a href="#">1</a></li>
+                      <li><a href="#">2</a></li>
+                      <li><a href="#">3</a></li>
+                      <li><a href="#">4</a></li>
+                      <li><a href="#">Next</a></li>
+                    </ul>
+                  </div>
+              </div>
+              <div class="tab-pane fade" id="dropdown1">
+                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+              </div>
+              <div class="tab-pane fade" id="dropdown2">
+                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </ui:define>
+</ui:composition>

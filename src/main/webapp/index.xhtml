@@ -3,6 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:define name="title">#{msgs['application.name']}</ui:define>
@@ -12,6 +13,7 @@
       <p class="lead">Use this document as a way to quick start any new project.<br /> All you get is this message and a barebones HTML document.</p>
       <small>@twitter</small>
     </blockquote>
+    <h:link outcome="topic" value="Topic" />
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 
     <address>
@@ -24,6 +26,21 @@
       <strong>Full Name</strong><br />
       <a href="mailto:#">first.last@gmail.com</a>
     </address>
+    <h:form>
+        <table class="table table-bordered">
+        <c:forEach var="user" items="#{userServiceImpl.allUsers}">
+            <tr>
+                <td><h:outputText value="#{user.id}"/></td>
+                <td>
+                    <h:commandLink action="#{selectedUser.setUserById('profile')}" value="#{user.userName}">
+                        <f:param name="userid" value="#{user.id}"/>
+                    </h:commandLink>
+                </td>
+                <td><h:outputText value="#{user.email}"/><br/></td>
+            </tr>
+        </c:forEach>
+        </table>
+    </h:form>
 
     </ui:define>
 </ui:composition>

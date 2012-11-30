@@ -37,7 +37,10 @@
                 <p class="muted credit">WPA - FEL ČVUT @ 2012 <a href="mailto:vlcekmi3@fel.cvut.cz">Michal Vlček</a>.</p>
             </div>
         </div>
-        <h:outputScript name="js/jquery.js" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" />
         <h:outputScript name="js/bootstrap.min.js" />
+        <script type="text/javascript">
+            $("[rel=tooltip]").tooltip();
+        </script>
     </h:body>
 </html>

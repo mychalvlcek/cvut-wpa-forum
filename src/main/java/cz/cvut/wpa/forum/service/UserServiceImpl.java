@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
  *
  * @author vlcekmi3
  */
+//@Component(value="users")
 @Component
 public class UserServiceImpl extends AbstractDataAccessService implements UserService {
 

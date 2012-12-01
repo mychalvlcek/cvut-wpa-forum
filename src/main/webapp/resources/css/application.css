@@ -1,4 +1,23 @@
-/* topic */
+/* content blocks */
+.type-block {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 100%;
+    padding: 17px 7px 0px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: black;
+    -webkit-border-radius: 4px 0 4px 0;
+    -moz-border-radius: 4px 0 4px 0;
+    border-radius: 4px 0 4px 0;
+}
+.type-block .type {
+    font-size: 20px;
+    font-weight: 200;
+}
 #new-post {
     background-color: #f5f5f5;
     border: 1px solid #ddd;
@@ -20,57 +39,102 @@
     transition: background .8s ease-in-out;
 }
 .label-block {
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  padding: 3px 7px;
-  font-size: 12px;
-  font-weight: bold;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  color: black;
-  -webkit-border-radius: 4px 0 4px 0;
-     -moz-border-radius: 4px 0 4px 0;
-          border-radius: 4px 0 4px 0;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: black;
+    -webkit-border-radius: 4px 0 4px 0;
+    -moz-border-radius: 4px 0 4px 0;
+    border-radius: 4px 0 4px 0;
 }
 .username {
-  color: black;
+    padding-right: 10px;
+    color: black;
 }
 .username:hover {
     color: black;
 }
 .posted {
-  padding: 3px 17px;
-  font-size: 12px;
-  font-weight: 300;
-  color: black;
+    border-left: 1px solid #ddd;
+    padding: 3px 17px;
+    font-size: 12px;
+    font-weight: 300;
+    color: black;
 }
-/* Base class */
-.media {
-  position: relative;
-  margin: 15px 0;
-  padding: 39px 10px 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-left: 5px solid #ddd;
-  border-right: 5px solid #ddd;
-  
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+/* index.xhtml - category */
+.category-block {
+    position: relative;
+    margin: 15px 0;
+    padding: 15px 40px 10px;
+    background-color: #fdfefe;
+    border: 1px solid #ddd;
+    border-left: 5px solid #ddd;
+    border-right: 5px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
-
-/* profile */
+/* category.xhtml - topic */
+.topic-block {
+    position: relative;
+    margin: 5px 0;
+    padding: 15px 40px 10px;
+    background-color: #fdfefe;
+    border: 1px solid #ddd;
+    border-left: 5px solid #ddd;
+    border-right: 5px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.topic-info {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    height: 100%;
+    width: 150px;
+    padding: 7px 7px 0px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: black;
+    -webkit-border-radius: 0px 0 4px 0;
+    -moz-border-radius: 0px 0 4px 0;
+    border-radius: 0px 0 4px 0;
+}
+.topic-info .last-post-username {
+    color: black;
+}
+/* topic.xhtml - post */
+.post-block {
+    position: relative;
+    margin: 15px 0;
+    padding: 39px 10px 10px;
+    background-color: #fdfefe;
+    border: 1px solid #ddd;
+    border-left: 5px solid #ddd;
+    border-right: 5px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+/* profile.xhtml - profile */
 .img-polaroid {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
 }
 
-/* alerts */
+/* ALERTS */
 .alert ul {
     list-style-type: none;
     margin: 0;
 }
-/* Sticky footer styles */
+/* FOOTER */
 html,
 body {
   height: 100%;
@@ -90,7 +154,8 @@ body {
 /* Set the fixed height of the footer here */
 #push,
 #footer {
-  height: 60px;
+  min-height: 60px;
+  padding: 20px 0;
 }
 #footer {
   background-color: #f5f5f5;

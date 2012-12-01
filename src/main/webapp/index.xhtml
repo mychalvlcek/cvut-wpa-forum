@@ -10,22 +10,57 @@
     <ui:define name="content">
     <h1>Bootstrap starter template</h1>
     <blockquote>
-      <p class="lead">Use this document as a way to quick start any new project.<br /> All you get is this message and a barebones HTML document.</p>
-      <small>@twitter</small>
+        <p class="lead">Use this document as a way to quick start any new project.<br /> All you get is this message and a barebones HTML document.</p>
     </blockquote>
-    <h:link outcome="topic" value="Topic" />
+    <!-- category -->
+    <div class="media category-block">
+        <div class="type-block">
+            <span class="type" title="K seznamu témat"><i class="icon-list"></i></span>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Category #1</a> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></h4>
+            <span class="pull-right">234 témat</span>
+        </div>
+    </div>
+    <!-- end category -->
+    <div class="media category-block">
+        <div class="type-block">
+            <span class="type"><i class="icon-list"></i></span>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Lorem Ipsum</a> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></h4>
+            <span class="pull-right">234 témat</span>
+        </div>
+    </div>
+    <div class="media category-block">
+        <div class="type-block">
+            <span class="type"><i class="icon-list"></i></span>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Test category</a> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></h4>
+            <span class="pull-right">1,234 témat</span>
+        </div>
+    </div>
+    <div class="media category-block">
+        <div class="type-block">
+            <span class="type"><i class="icon-list"></i></span>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Another category</a> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></h4>
+            <span class="pull-right">1 téma</span>
+        </div>
+    </div>
+    <div class="media category-block">
+        <div class="type-block">
+            <span class="type"><i class="icon-list"></i></span>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Bootstrap starter template</a></h4>
+            <span class="pull-right">234 témat</span>
+        </div>
+    </div>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-    <address>
-      <strong>Twitter, Inc.</strong><br />
-      795 Folsom Ave, Suite 600<br />
-      San Francisco, CA 94107<br />
-      <abbr title="Phone">P:</abbr> (123) 456-7890
-    </address>
-    <address>
-      <strong>Full Name</strong><br />
-      <a href="mailto:#">first.last@gmail.com</a>
-    </address>
+    
     <h:form>
         <table class="table table-bordered">
         <c:forEach var="user" items="#{userServiceImpl.allUsers}">

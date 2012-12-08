@@ -31,6 +31,7 @@ public class User extends AbstractBusinessObject {
     private String salt;
     @Column(nullable = false)
     private String email;
+    private Boolean isAdmin;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Role> roles;
     @OneToMany(mappedBy="author", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
@@ -157,5 +158,23 @@ public class User extends AbstractBusinessObject {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public boolean hasPassword(String password) {
+        if(hashProvider.computeHash(password + salt).equals(this.password)){
+            return true;
+        }
+        return false;
+    }
+    
+    public Boolean isAdmin() {
+        if(isAdmin == null){
+            return false;
+        }
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

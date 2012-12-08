@@ -1,5 +1,6 @@
 package cz.cvut.wpa.forum.bb;
 
+import cz.cvut.wpa.forum.helper.FacesUtil;
 import cz.cvut.wpa.forum.service.UserService;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -25,7 +26,7 @@ public class Register {
     
     public String storeUser() {
         userService.addUser(getUsername(), getPassword(), getEmail());
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Úspěch!", "Registrace proběhla úspěšně."));
+        FacesUtil.addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Úspěch!", "Registrace proběhla úspěšně."));
         return "index.xhtml";
     }
 

@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:webflow="http://www.springframework.org/schema/webflow-config"
@@ -57,4 +57,10 @@
     
     <!-- Podpora deklarativni demarkace transakci - anotace @Transactional-->
     <tx:annotation-driven transaction-manager="txManager" /> 
+    
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager">
+            <ref bean="txManager"/>
+        </property>
+    </bean>
 </beans>

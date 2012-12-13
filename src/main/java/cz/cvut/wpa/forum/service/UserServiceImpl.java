@@ -17,14 +17,16 @@ import org.springframework.stereotype.Component;
 public class UserServiceImpl extends AbstractDataAccessService implements UserService {
 
     @Override
-    public Long addUser(String userName, String password, String email) {
+    public Long addUser(String userName, String password, String email, boolean isAdmin) {
         User newUser = new User();
         newUser.setEmail(email);
         newUser.setPassword(password);
         newUser.setUserName(userName);
-        /* role */
-        //Role role = genericDao.getById(3L, Role.class);        
-        //newUser.addRole(role);
+        newUser.setIsAdmin(isAdmin);
+        newUser.addRole(genericDao.getByPropertyUnique("name", "ROLE_USER", Role.class));
+        if(isAdmin)
+            newUser.addRole(genericDao.getByPropertyUnique("name", "ROLE_ADMIN", Role.class));
+        
         return genericDao.saveOrUpdate(newUser).getId();
     }
 
@@ -39,7 +41,7 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
         List<UserDto> userDtos = new ArrayList<UserDto>();
 
         for (User u : users) {
-            userDtos.add(new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getMessages()), DtoTransformerHelper.getIdentifiers(u.getPosts()), DtoTransformerHelper.getIdentifiers(u.getTopics()), DtoTransformerHelper.getIdentifiers(u.getRoles())));
+            userDtos.add(new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getMessages()), DtoTransformerHelper.getIdentifiers(u.getPosts()), DtoTransformerHelper.getIdentifiers(u.getTopics()), DtoTransformerHelper.getIdentifiers(u.getRoles()), u.getCreated(), u.getUpdated()));
         }
         return userDtos;
     }
@@ -47,6 +49,6 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
     @Override
     public UserDto getUserById(Long id) {
         User u = genericDao.getByPropertyUnique("id", id, User.class);
-        return new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getMessages()), DtoTransformerHelper.getIdentifiers(u.getPosts()), DtoTransformerHelper.getIdentifiers(u.getTopics()), DtoTransformerHelper.getIdentifiers(u.getRoles()));
+        return new UserDto(u.getId(), u.getUserName(), u.getEmail(), DtoTransformerHelper.getIdentifiers(u.getMessages()), DtoTransformerHelper.getIdentifiers(u.getPosts()), DtoTransformerHelper.getIdentifiers(u.getTopics()), DtoTransformerHelper.getIdentifiers(u.getRoles()), u.getCreated(), u.getUpdated());
     }
 }

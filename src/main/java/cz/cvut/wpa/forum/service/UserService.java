@@ -2,6 +2,7 @@ package cz.cvut.wpa.forum.service;
 
 import cz.cvut.wpa.forum.dto.UserDto;
 import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -18,12 +19,13 @@ public interface UserService {
      * @param email email of the user
      * @return identifier of the user stored
      */
-    public Long addUser(String userName, String password, String email);
+    public Long addUser(String userName, String password, String email, boolean isAdmin);
 
     /**
      * Permanently removes the user
      * @param userId id of the user to be removed
      */
+    @PreAuthorize("hasRole(['ROLE_ADMIN'])")
     public void deleteUser(Long userId);
     
     /**

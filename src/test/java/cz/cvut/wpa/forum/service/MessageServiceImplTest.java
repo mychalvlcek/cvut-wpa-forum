@@ -2,6 +2,7 @@ package cz.cvut.wpa.forum.service;
 
 import cz.cvut.wpa.forum.dto.MessageDto;
 import cz.cvut.wpa.forum.service.MessageService;
+import cz.cvut.wpa.forum.service.RoleService;
 import cz.cvut.wpa.forum.service.UserService;
 import java.util.List;
 import static org.junit.Assert.*;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class MessageServiceImplTest extends AbstractServiceTest {
     @Autowired
+    private RoleService roleService;
+    @Autowired
     private MessageService messageService;
     @Autowired
     private UserService userService;
@@ -24,6 +27,7 @@ public class MessageServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testAddAndRetrieveMessage() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long recipientId = addUser();
 
@@ -45,6 +49,7 @@ public class MessageServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testAddAndRemoveMessage() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long recipientId = addUser();
 
@@ -63,6 +68,7 @@ public class MessageServiceImplTest extends AbstractServiceTest {
     
     @Test
     public void testMessageDeletedWhenUserRemoved() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long recipientId = addUser();
 
@@ -82,6 +88,7 @@ public class MessageServiceImplTest extends AbstractServiceTest {
     
     @Test
     public void testUserDeletedWhenMessageRemoved() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long recipientId = addUser();
 
@@ -99,8 +106,9 @@ public class MessageServiceImplTest extends AbstractServiceTest {
         String userName = "UserName" + System.currentTimeMillis();
         String passwd = "passwd" + System.currentTimeMillis();
         String email = "email@email.com";
-
-        return userService.addUser(userName, passwd, email);
+        boolean isAdmin = false;
+        
+        return userService.addUser(userName, passwd, email, isAdmin);
     }
 
 }

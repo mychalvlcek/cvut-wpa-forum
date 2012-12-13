@@ -9,6 +9,7 @@ import java.util.List;
 public class CategoryDto extends AbstractDto {
     private String title;
     private List<Long> topics;
+    private List<TopicDto> topicX;
     
     public CategoryDto() {
         
@@ -20,6 +21,13 @@ public class CategoryDto extends AbstractDto {
         this.topics = topics;
     }
 
+    /*
+    public CategoryDto(Long id, String title, List<TopicDto> topics) {
+        this.id = id;
+        this.title = title;
+        this.topicX = topics;
+    }
+    */
     public String getTitle() {
         return title;
     }
@@ -34,6 +42,10 @@ public class CategoryDto extends AbstractDto {
 
     public void setTopics(List<Long> topics) {
         this.topics = topics;
+    }
+    
+    public int getTopicsCount() {
+        return this.topics.size();
     }
 
 }

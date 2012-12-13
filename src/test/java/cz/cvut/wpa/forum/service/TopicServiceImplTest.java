@@ -4,6 +4,7 @@ import cz.cvut.wpa.forum.dto.TopicDto;
 import cz.cvut.wpa.forum.service.CategoryService;
 import cz.cvut.wpa.forum.service.TopicService;
 import cz.cvut.wpa.forum.service.UserService;
+import cz.cvut.wpa.forum.service.RoleService;
 import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author vlcekmi3
  */
 public class TopicServiceImplTest extends AbstractServiceTest {
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private CategoryService categoryService;
     @Autowired
@@ -27,6 +30,7 @@ public class TopicServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testAddAndRetrieveTopic() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long categoryId = addCategory();
         String title = "topic";
@@ -40,6 +44,7 @@ public class TopicServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testAddAndRemoveTopic() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long categoryId = addCategory();
         String title = "topic";
@@ -55,8 +60,9 @@ public class TopicServiceImplTest extends AbstractServiceTest {
         String userName = "UserName" + System.currentTimeMillis();
         String passwd = "passwd" + System.currentTimeMillis();
         String email = "email@email.com";
-
-        return userService.addUser(userName, passwd, email);
+        boolean isAdmin = false;
+        
+        return userService.addUser(userName, passwd, email, isAdmin);
     }
     
     private long addCategory() {

@@ -86,6 +86,12 @@ public class GenericHibernateJpaDao implements GenericDao {
     public <ENTITY> ENTITY getById(Long id, Class<ENTITY> clazz) {
         return getEntityManager().find(clazz, id);
     }
+    
+    @SuppressWarnings("unchecked")
+    public <ENTITY> List<ENTITY> getByIds(String property, List<Object> value, Class<ENTITY> clazz) {
+        String queryString = "SELECT e FROM " + clazz.getSimpleName() + " e WHERE e." + property + " IN (:value)";
+        return getEntityManager().createQuery(queryString).setParameter("value", value).getResultList();
+    }
 
     @SuppressWarnings("unchecked")
     public <ENTITY> ENTITY loadById(long id, Class<ENTITY> clazz) {

@@ -9,19 +9,25 @@
     <ui:define name="title">#{msgs['application.name']}</ui:define>
     <ui:define name="content">
         <!-- category title -->
-        <h1>Category #1</h1>
+        <h1>#{category.category.title}</h1>
         <!-- category desc -->
-        <p class="lead">Use this document as a way to quick start any new project. All you get is this message and a barebones HTML document.</p>
+        <p class="lead">Description of top-level category. Use this document as
+            a way to quick start any new project. All you get is this message
+            and a barebones HTML document. Description of top-level category.</p>
         <!-- bread nav -->
         <ul class="breadcrumb">
             <li><a href="/wpa-forum/">wpaforum</a> <span class="divider">/</span></li>
-            <li class="active">Category #1</li>
+            <li class="active">#{category.category.title}</li>
         </ul>
         <!-- nav -->
         <div class="btn-toolbar">
             <div class="btn-group">
                 <a class="btn" href="/wpa-forum/"><i class="icon-arrow-left"></i> Zpět na seznam kategorií</a>
-                <button class="btn"><i class="icon-plus"></i> Nové téma</button>
+                <h:outputLink value="new_topic.xhtml" styleClass="btn">
+                    <i class="icon-plus"></i>
+                    <f:param name="id" value="#{category.category.id}" />
+                    <h:outputText value="Nové téma" />
+                </h:outputLink>
             </div>
             <div class="btn-group pull-right">
               <button class="btn">1</button>
@@ -29,112 +35,38 @@
               <button class="btn">3</button>
             </div>
         </div>
+        
         <!-- topic -->
-        <div class="media topic-block">
-            <div class="type-block">
-                <span class="type"><i class="icon-list-alt"></i></span>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading" style="float: left;margin-right: 10px;"><a href="/wpa-forum/topic.xhtml">Topic #1</a></h4>
-                <div class="topic-info">
-                    <a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3"><h:graphicImage class="media-object img-rounded pull-right" width="35" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="Alternate text" /></a>
-                    <span><a href="/wpa-forum/topic.xhtml#post" rel="tooltip" title="Poslední příspěvek" data-placement="left">28.12. 2012, 11:55</a></span>
-                    <span><a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3" class="last-post-username">vlcekmi3</a></span>
+        <ui:repeat value="#{category.topics}" var="topic">
+            <div class="media topic-block">
+                <div class="type-block">
+                    <span class="type"><i class="icon-list-alt"></i></span>
                 </div>
-                <span class="pull-right" style="margin-right: 180px;">1,234 odpovědí</span>
-            </div>
-        </div>
-        <!-- topic -->
-        <div class="media topic-block">
-            <div class="type-block">
-                <span class="type"><i class="icon-list-alt"></i></span>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading" style="float: left;"><a href="/wpa-forum/topic.xhtml">Another topic</a></h4>
-                <div class="topic-info">
-                    <a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3"><h:graphicImage class="media-object img-rounded pull-right" width="35" url="http://placehold.it/64x64" alt="Alternate text" /></a>
-                    <span><a href="/wpa-forum/topic.xhtml#post" rel="tooltip" title="Poslední příspěvek" data-placement="left">28.12. 2012, 11:55</a></span>
-                    <span><a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3" class="last-post-username">vlcekmi3</a></span>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <h:outputLink value="/wpa-forum/topic.xhtml">
+                            <f:param name="id" value="#{topic.id}" />
+                            <h:outputText value="#{topic.title}" />
+                        </h:outputLink>
+                    </h4>
+                    <div class="topic-info">
+                        <h:outputLink value="/wpa-forum/profile.xhtml" title="vlcekmi3's profile" styleClass="last-post-username">
+                            <f:param name="id" value="#{topic.author}" />
+                            <h:graphicImage class="media-object img-rounded pull-right" width="35" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="vlcekmi3's avatar" />
+                        </h:outputLink>
+                        <span><a href="/wpa-forum/topic.xhtml#post" rel="tooltip" title="Poslední příspěvek" data-placement="left">28.12. 2012, 11:55</a></span><br />
+                        <span>
+                            <h:outputLink value="/wpa-forum/profile.xhtml" title="vlcekmi3's profile" styleClass="last-post-username">
+                                <f:param name="id" value="#{topic.author}" />
+                                <h:outputText value="#{topic.author}" />
+                            </h:outputLink>
+                        </span>
+                    </div>
+                    <span class="pull-right replies">#{topic.postsCount} odpovědí</span>
                 </div>
-                <span class="pull-right" style="margin-right: 180px;">1,234 odpovědí</span>
             </div>
-        </div>
-        <!-- topic -->
-        <div class="media topic-block">
-            <div class="type-block">
-                <span class="type"><i class="icon-list-alt"></i></span>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading" style="float: left;"><a href="/wpa-forum/topic.xhtml">Bootstrap starter template</a></h4>
-                <div class="topic-info">
-                    <a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3"><h:graphicImage class="media-object img-rounded pull-right" width="35" url="http://hatkraft.com/uploads/profile/photo-48.jpg?_r=0" alt="Alternate text" /></a>
-                    <span><a href="/wpa-forum/topic.xhtml#post" rel="tooltip" title="Poslední příspěvek" data-placement="left">28.12. 2012, 11:55</a></span>
-                    <span><a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3" class="last-post-username">vlcekmi3</a></span>
-                </div>
-                <span class="pull-right" style="margin-right: 180px;">121,234 odpovědí</span>
-            </div>
-        </div>
-        <!-- topic -->
-        <div class="media topic-block">
-            <div class="type-block">
-                <span class="type"><i class="icon-list-alt"></i></span>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading" style="float: left;"><a href="/wpa-forum/topic.xhtml">Test topic</a></h4>
-                <div class="topic-info">
-                    <a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3"><h:graphicImage class="media-object img-rounded pull-right" width="35" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="Alternate text" /></a>
-                    <span><a href="/wpa-forum/topic.xhtml#post" rel="tooltip" title="Poslední příspěvek" data-placement="left">28.12. 2012, 11:55</a></span>
-                    <span><a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3" class="last-post-username">vlcekmi3</a></span>
-                </div>
-                <span class="pull-right" style="margin-right: 180px;">1 odpovědí</span>
-            </div>
-        </div>
-        <!-- topic -->
-        <div class="media topic-block">
-            <div class="type-block">
-                <span class="type"><i class="icon-list-alt"></i></span>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading" style="float: left;"><a href="/wpa-forum/topic.xhtml">Lorem Ipsum</a></h4>
-                <div class="topic-info">
-                    <a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3"><h:graphicImage class="media-object img-rounded pull-right" width="35" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="Alternate text" /></a>
-                    <span><a href="/wpa-forum/topic.xhtml#post" rel="tooltip" title="Poslední příspěvek" data-placement="left">28.12. 2012, 11:55</a></span>
-                    <span><a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3" class="last-post-username">vlcekmi3@fel.cvut.cz</a></span>
-                </div>
-                <span class="pull-right" style="margin-right: 180px;">1,234 odpovědí</span>
-            </div>
-        </div>
-        <!-- topic -->
-        <div class="media topic-block">
-            <div class="type-block">
-                <span class="type"><i class="icon-list-alt"></i></span>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading" style="float: left;"><a href="/wpa-forum/topic.xhtml">Topic #1</a></h4>
-                <div class="topic-info">
-                    <a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3"><h:graphicImage class="media-object img-rounded pull-right" width="35" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="Alternate text" /></a>
-                    <span><a href="/wpa-forum/topic.xhtml#post" rel="tooltip" title="Poslední příspěvek" data-placement="left">28.12. 2012, 11:55</a></span>
-                    <span><a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3" class="last-post-username">Michal Vlček</a></span>
-                </div>
-                <span class="pull-right" style="margin-right: 180px;">1,234 odpovědí</span>
-            </div>
-        </div>
-        <!-- topic -->
-        <div class="media topic-block">
-            <div class="type-block">
-                <span class="type"><i class="icon-list-alt"></i></span>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading" style="float: left;"><a href="/wpa-forum/topic.xhtml">Topic #1</a></h4>
-                <div class="topic-info">
-                    <a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3"><h:graphicImage class="media-object img-rounded pull-right" width="35" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="Alternate text" /></a>
-                    <span><a href="/wpa-forum/topic.xhtml#post" rel="tooltip" title="Poslední příspěvek" data-placement="left">28.12. 2012, 11:55</a></span>
-                    <span><a href="/wpa-forum/profile.xhtml" title="Profil: vlcekmi3" class="last-post-username">mychalvlcek</a></span>
-                </div>
-                <span class="pull-right" style="margin-right: 180px;">1,234 odpovědí</span>
-            </div>
-        </div>
-        <!-- end -->
+        </ui:repeat>
+        <!-- end topic -->
         <hr />
         <div class="btn-toolbar">
             <div class="btn-group">

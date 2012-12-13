@@ -3,6 +3,7 @@ package cz.cvut.wpa.forum.service;
 import cz.cvut.wpa.forum.service.CategoryService;
 import cz.cvut.wpa.forum.service.PostService;
 import cz.cvut.wpa.forum.service.TopicService;
+import cz.cvut.wpa.forum.service.RoleService;
 import cz.cvut.wpa.forum.service.UserService;
 import cz.cvut.wpa.forum.dto.PostDto;
 import java.util.List;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author vlcekmi3
  */
 public class PostServiceImplTest extends AbstractServiceTest {
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private CategoryService categoryService;
     @Autowired
@@ -30,6 +33,7 @@ public class PostServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testAddAndRetrievePost() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long categoryId = addCategory();
         Long topicId = addTopic(userId, categoryId);
@@ -50,6 +54,7 @@ public class PostServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testAddAndRemovePost() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long categoryId = addCategory();
         Long topicId = addTopic(userId, categoryId);
@@ -65,6 +70,7 @@ public class PostServiceImplTest extends AbstractServiceTest {
     
     @Test
     public void testPostDeletedWhenUserRemoved() {
+        roleService.addRole("ROLE_USER");
         Long userId = addUser();
         Long categoryId = addCategory();
         Long topicId = addTopic(userId, categoryId);
@@ -83,8 +89,9 @@ public class PostServiceImplTest extends AbstractServiceTest {
         String userName = "UserName" + System.currentTimeMillis();
         String passwd = "passwd" + System.currentTimeMillis();
         String email = "email@email.com";
+        boolean isAdmin = false;
 
-        return userService.addUser(userName, passwd, email);
+        return userService.addUser(userName, passwd, email, isAdmin);
     }
     
     private long addCategory() {

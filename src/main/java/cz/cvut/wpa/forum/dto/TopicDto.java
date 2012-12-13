@@ -1,5 +1,6 @@
 package cz.cvut.wpa.forum.dto;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,12 +16,14 @@ public class TopicDto extends AbstractDto {
     public TopicDto() {
     }
 
-    public TopicDto(Long id, String title, Long author, Long category, List<Long> posts) {
+    public TopicDto(Long id, String title, Long author, Long category, List<Long> posts, Date created, Date updated) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.category = category;
         this.posts = posts;
+        this.created = created;
+        this.updated = updated;
     }
 
     public String getTitle() {
@@ -45,6 +48,10 @@ public class TopicDto extends AbstractDto {
 
     public void setCategory(Long category) {
         this.category = category;
+    }
+    
+    public int getPostsCount() {
+        return this.posts.size();
     }
     
 }

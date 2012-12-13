@@ -9,7 +9,7 @@
         <f:facet name="first">
             <meta charset="utf-8"/>
             
-            <title><ui:insert name="title">#{msgs['application.name']}</ui:insert></title>
+            <title><ui:insert name="title">#{msgs['application.name']}</ui:insert> - #{msgs['application.name']}</title>
             
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta name="description" content="" />
@@ -25,9 +25,7 @@
     <h:body>
         <div id="wrap">
             <!-- navigation -->
-            <ui:insert name="nav">
-                <ui:include src="_navbar.xhtml"/>
-            </ui:insert>
+            <ui:include src="_navbar.xhtml"/>
             <div class="container">
                 <!-- alerts -->
                 <h:messages globalOnly="true" class="alert" showDetail="true" showSummary="true" />

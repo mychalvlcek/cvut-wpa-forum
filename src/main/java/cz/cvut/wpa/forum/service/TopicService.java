@@ -1,5 +1,7 @@
 package cz.cvut.wpa.forum.service;
 
+import cz.cvut.wpa.forum.bo.User;
+import cz.cvut.wpa.forum.dto.PostDto;
 import cz.cvut.wpa.forum.dto.TopicDto;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +36,21 @@ public interface TopicService {
     public List<TopicDto> getAllTopics();
     
     /**
+     * Get all topics from given category
+     * @param id id of the category
+     */
+    @Transactional(readOnly=true)
+    public List<TopicDto> getTopicsByCategory(Long id);
+
+    /**
      * Return topic with the given id
      * @param id idenfier of the topic to be retrieved
      * @return topic with the given id, null if the topic does not exist
      */
     @Transactional(readOnly=true)
     public TopicDto getTopicById(Long id);
+    
+    @Transactional(readOnly=true)
+    public PostDto getLastPostFromTopic(Long id);
     
 }

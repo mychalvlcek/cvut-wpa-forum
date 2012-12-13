@@ -38,7 +38,7 @@ public class MessageServiceImpl extends AbstractDataAccessService implements Mes
         List<MessageDto> messageDtos = new ArrayList<MessageDto>();
         
         for(Message m : messages) {
-            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient())));
+            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient()), m.getCreated(), m.getUpdated()));
         }
         return messageDtos;        
     }
@@ -53,7 +53,7 @@ public class MessageServiceImpl extends AbstractDataAccessService implements Mes
         List<MessageDto> messageDtos = new ArrayList<MessageDto>();
         
         for(Message m : messages) {
-            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient())));
+            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient()), m.getCreated(), m.getUpdated()));
         }
         return messageDtos;
     }

@@ -39,7 +39,18 @@ public class PostServiceImpl extends AbstractDataAccessService implements PostSe
         List<PostDto> postDtos = new ArrayList<PostDto>();
         
         for(Post p : posts) {
-            postDtos.add(new PostDto(p.getId(), p.getTitle(), p.getContent(), HibernateTools.getIdentifier(p.getAuthor()), HibernateTools.getIdentifier(p.getTopic())));
+            postDtos.add(new PostDto(p.getId(), p.getTitle(), p.getContent(), HibernateTools.getIdentifier(p.getAuthor()), HibernateTools.getIdentifier(p.getTopic()), p.getCreated(), p.getUpdated()));
+        }
+        return postDtos;        
+    }
+    
+    @Override
+    public List<PostDto> getPostsByTopic(Long topicId) {
+        List<Post> posts = genericDao.getByProperty("topic", genericDao.loadById(topicId, Topic.class), Post.class);
+        List<PostDto> postDtos = new ArrayList<PostDto>();
+        
+        for(Post p : posts) {
+            postDtos.add(new PostDto(p.getId(), p.getTitle(), p.getContent(), HibernateTools.getIdentifier(p.getAuthor()), HibernateTools.getUserDto(p.getAuthor()), HibernateTools.getIdentifier(p.getTopic()), p.getCreated(), p.getUpdated()));
         }
         return postDtos;        
     }
@@ -50,7 +61,7 @@ public class PostServiceImpl extends AbstractDataAccessService implements PostSe
         List<PostDto> postDtos = new ArrayList<PostDto>();
         
         for(Post p : posts) {
-            postDtos.add(new PostDto(p.getId(), p.getTitle(), p.getContent(), HibernateTools.getIdentifier(p.getAuthor()), HibernateTools.getIdentifier(p.getTopic())));
+            postDtos.add(new PostDto(p.getId(), p.getTitle(), p.getContent(), HibernateTools.getIdentifier(p.getAuthor()), HibernateTools.getUserDto(p.getAuthor()), HibernateTools.getIdentifier(p.getTopic()), p.getCreated(), p.getUpdated()));
         }
         return postDtos;        
     }

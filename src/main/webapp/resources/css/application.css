@@ -79,6 +79,9 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
+.category-block h4.media-heading {
+    float: left;
+}
 /* category.xhtml - topic */
 .topic-block {
     position: relative;
@@ -92,7 +95,7 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-.topic-info {
+.topic-block .topic-info {
     position: absolute;
     top: -1px;
     right: -1px;
@@ -108,17 +111,24 @@
     -moz-border-radius: 0px 0 4px 0;
     border-radius: 0px 0 4px 0;
 }
-.topic-info span {
+.topic-block .topic-info span {
     float: right;
 }
-.topic-info .last-post-username {
+.topic-block .topic-info .last-post-username {
     color: black;
+}
+.topic-block .media-heading {
+    float: left;
+    margin-right: 10px;
+}
+.topic-block .replies {
+    margin-right: 180px;
 }
 /* topic.xhtml - post */
 .post-block {
     position: relative;
     margin: 15px 0;
-    padding: 39px 10px 10px;
+    padding :39px 10px 10px;
     background-color: #fdfefe;
     border: 1px solid #ddd;
     border-left: 5px solid #ddd;
@@ -127,8 +137,33 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
+.post-block .actions {
+    margin-top:-30px;
+}
+.post-block span.status {
+    margin: 2px;
+}
+.new-message textarea {
+    width:520px;
+    height:150px;
+}
 /* profile.xhtml - profile */
-.img-polaroid {
+.profile .profile-username {
+    margin-top:0px;
+    font-size:1.5em;
+}
+.profile ul.info {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.profile ul.info li {
+    font-weight:bold;
+}
+.profile ul.info li span.muted {
+    font-weight:200;
+}
+.profile .img-polaroid {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
 }
 

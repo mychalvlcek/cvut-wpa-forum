@@ -6,74 +6,29 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <ui:define name="title">#{msgs['application.name']}</ui:define>
+    <ui:define name="title">Hlavní stránka</ui:define>
     <ui:define name="content">
-    <h1>Bootstrap starter template</h1>
-    <a href="/wpa-forum/login.xhtml">login</a>
-    <!-- category -->
-    <div class="media category-block">
-        <div class="type-block">
-            <span class="type" title="K seznamu témat"><i class="icon-list"></i></span>
-        </div>
-        <div class="media-body">
-            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Category #1</a> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></h4>
-            <span class="pull-right">234 témat</span>
-        </div>
-    </div>
-    <!-- end category -->
-    <div class="media category-block">
-        <div class="type-block">
-            <span class="type"><i class="icon-list"></i></span>
-        </div>
-        <div class="media-body">
-            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Lorem Ipsum</a> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></h4>
-            <span class="pull-right">234 témat</span>
-        </div>
-    </div>
-    <div class="media category-block">
-        <div class="type-block">
-            <span class="type"><i class="icon-list"></i></span>
-        </div>
-        <div class="media-body">
-            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Test category</a> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></h4>
-            <span class="pull-right">1,234 témat</span>
-        </div>
-    </div>
-    <div class="media category-block">
-        <div class="type-block">
-            <span class="type"><i class="icon-list"></i></span>
-        </div>
-        <div class="media-body">
-            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Another category</a> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></h4>
-            <span class="pull-right">1 téma</span>
-        </div>
-    </div>
-    <div class="media category-block">
-        <div class="type-block">
-            <span class="type"><i class="icon-list"></i></span>
-        </div>
-        <div class="media-body">
-            <h4 class="media-heading" style="float:left;"><a href="/wpa-forum/category.xhtml">Bootstrap starter template</a></h4>
-            <span class="pull-right">234 témat</span>
-        </div>
-    </div>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    
-    <h:form>
-        <table class="table table-bordered">
-        <c:forEach var="user" items="#{userServiceImpl.allUsers}">
-            <tr>
-                <td><h:outputText value="#{user.id}"/></td>
-                <td>
-                    <h:commandLink action="#{selectedUser.setUserById('profile')}" value="#{user.userName}">
-                        <f:param name="userid" value="#{user.id}"/>
-                    </h:commandLink>
-                </td>
-                <td><h:outputText value="#{user.email}"/><br/></td>
-            </tr>
-        </c:forEach>
-        </table>
+        <h:form rendered="#{!init.isInit}">
+        <h1><h:commandLink action="#{init.init}" value="Init databázových dat!" /></h1>
     </h:form>
+
+    <!-- category -->
+    <ui:repeat value="#{categoryServiceImpl.allCategories}" var="cat">
+        <div class="media category-block">
+            <div class="type-block">
+                <span class="type" title="K seznamu témat"><i class="icon-list"></i></span>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <h:link outcome="category.xhtml" value="#{cat.title}">
+                        <f:param name="id" value="#{cat.id}" />
+                    </h:link>
+                    <small>Description of top-level category.</small></h4>
+                <span class="pull-right">#{cat.topicsCount} témat</span>
+            </div>
+        </div>
+    </ui:repeat>
+    <!-- end category -->
 
     </ui:define>
 </ui:composition>

@@ -16,7 +16,6 @@ public class Role extends AbstractBusinessObject {
     @Column(unique = true, nullable = false)
     private String name;
     @ManyToMany(mappedBy = "roles", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @OrderBy("userName ASC")
     private List<User> users;
 
     public String getName() {

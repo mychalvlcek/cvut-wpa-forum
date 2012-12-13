@@ -1,5 +1,6 @@
 package cz.cvut.wpa.forum.dto;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class UserDto extends AbstractDto{
     public UserDto() {
     }
 
-    public UserDto(Long id, String userName, String email, List<Long> messages, List<Long> posts, List<Long> topics, List<Long> roles) {
+    public UserDto(Long id, String userName, String email, List<Long> messages, List<Long> posts, List<Long> topics, List<Long> roles, Date created, Date updated) {
         this.id = id;
         this.email = email;
         this.userName = userName;
@@ -25,6 +26,8 @@ public class UserDto extends AbstractDto{
         this.posts = posts;
         this.topics = topics;
         this.roles = roles;
+        this.created = created;
+        this.updated = updated;
     }
 
     public String getUserName() {
@@ -73,6 +76,10 @@ public class UserDto extends AbstractDto{
 
     public void setRoles(List<Long> roles) {
         this.roles = roles;
+    }
+    
+    public int getPostsCount() {
+        return this.posts.size();
     }
     
 }

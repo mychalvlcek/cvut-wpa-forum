@@ -1,9 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:sec="http://www.springframework.org/security/facelets/tags">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:sec="http://www.springframework.org/security/facelets/tags">
     
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
@@ -16,18 +16,13 @@
                 <h:link class="brand" outcome="index" value="#{msgs['application.name']}" />
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li><a href="#about">#{msgs['navbar.about']}</a></li>
-                        <li><a href="#contact">#{msgs['navbar.contact']}</a></li>
+                        <li><a href="/wpa-forum/admin/">Admin</a></li>
+                        <!-- Webservices -->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">WebService <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/wpa-forum/jersey/a">Available methods</a></li>
-                                <li class="divider"></li>
-                                <li class="nav-header">Nav header</li>
+                                <li class="nav-header">Metody</li>
                                 <li><a href="/wpa-forum/jersey/a/hello">Hello</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -45,15 +40,15 @@
                         <ul class="nav pull-right">
                             <li class="divider-vertical"></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msgs['navbar.userbar']} <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msgs['navbar.logged_as']} #{loggedUser.username()} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><h:link outcome="profile.xhtml" value="#{msgs['navbar.profile']}"/></li>
-                                    <li><a href="/wpa-forum/profile.xhtml#dropdown1">Upravit profil</a></li>
-                                    <li><a href="/wpa-forum/profile.xhtml#dropdown2">Změna hesla</a></li>
-                                    <li><h:link outcome="login.xhtml" value="#{msgs['navbar.login']}"/></li>
-                                    <li><h:link outcome="registration.xhtml" title="Registrační formulář" value="#{msgs['navbar.register']}"/></li>
+                                    <li>
+                                        <h:link outcome="profile.xhtml" value="#{msgs['navbar.profile']}">
+                                            <f:param name="id" value="#{loggedUser.id()}" />
+                                        </h:link>
+                                    </li>
                                     <li class="divider"></li>
-                                    <li><a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">#{msgs['navbar.logout']}</a></li>
+                                    <li><a href="/wpa-forum/j_spring_security_logout">#{msgs['navbar.logout']}</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -65,4 +60,4 @@
             </div>
         </div>
     </div>
-</html>
+</ui:composition>

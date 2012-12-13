@@ -29,6 +29,14 @@ public interface PostService {
      */
     @Transactional(readOnly=true)
     public List<PostDto> getAllPosts();
+    
+    /**
+     * Get all posts from given topic
+     * @param topicId identifier of the topic
+     * @return topic posts
+     */
+    public List<PostDto> getPostsByTopic(Long topicId);
+    
     /**
      * Get all posts written by the given user
      * @param userId identifier of the user

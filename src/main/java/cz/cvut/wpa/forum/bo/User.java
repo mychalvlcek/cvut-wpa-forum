@@ -7,10 +7,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
@@ -52,8 +55,13 @@ public class User extends AbstractBusinessObject {
         this.hashProvider = hashProvider;
     }
     
-    public boolean addRole(Role role) {
-        return roles.add(role);
+    public void addRole(Role role) {
+        if(this.roles == null){
+            roles = new ArrayList<Role>();
+        }
+        if(!this.roles.contains(role)) {
+            roles.add(role);
+        }
     }
     
     public void setRoles(List<Role> roles) {

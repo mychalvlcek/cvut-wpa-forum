@@ -2,6 +2,7 @@ package cz.cvut.wpa.forum.bb;
 
 import cz.cvut.wpa.forum.helper.FacesUtil;
 import cz.cvut.wpa.forum.service.UserService;
+import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +18,18 @@ import org.springframework.stereotype.Component;
 @Scope(value="request")
 public class Register {
     
-    protected String username;
-    protected String email;
-    protected String password;
+    private String username;
+    private String email;
+    private String password;
+    private boolean isAdmin;
     
     @Autowired
     protected UserService userService;
     
-    public String storeUser() {
-        userService.addUser(getUsername(), getPassword(), getEmail());
+    public void storeUser() throws IOException {
+        userService.addUser(getUsername(), getPassword(), getEmail(), getIsAdmin());
         FacesUtil.addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Úspěch!", "Registrace proběhla úspěšně."));
-        return "index.xhtml";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
     }
 
     public String getUsername() {
@@ -52,6 +54,14 @@ public class Register {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
     
 }

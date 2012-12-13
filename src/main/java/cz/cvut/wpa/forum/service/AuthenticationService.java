@@ -1,5 +1,6 @@
 package cz.cvut.wpa.forum.service;
 
+import cz.cvut.wpa.forum.bo.Role;
 import cz.cvut.wpa.forum.dao.GenericDao;
 import cz.cvut.wpa.forum.helper.FacesUtil;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import org.springframework.security.authentication.dao.AbstractUserDetailsAuthen
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
-import org.springframework.security.core.userdetails.User;
+import cz.cvut.wpa.forum.components.LoggedUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.cache.NullUserCache;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -66,11 +67,10 @@ public class AuthenticationService extends AbstractUserDetailsAuthenticationProv
                         throw new BadCredentialsException("Neplatne uzivatelske udaje!");
                     } else {
                         List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
-                        auths.add(new GrantedAuthorityImpl("ROLE_USER"));
-                        if(u.isAdmin()){
-                            auths.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+                        for(Role role : u.getRoles()) {
+                            auths.add(new GrantedAuthorityImpl(role.getName()));
                         }
-                        ud = new User(u.getUserName(), u.getPassword(), auths);
+                        ud = new LoggedUserDetails(u.getId(), u.getUserName(), u.getPassword(), auths);
                     }
                 } catch(AuthenticationException e) {
                     status.setRollbackOnly();

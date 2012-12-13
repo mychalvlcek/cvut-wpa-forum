@@ -1,22 +1,28 @@
 package cz.cvut.wpa.forum.helper;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 /**
  *
- * @author Pavel Micka
+ * @author vlcekmi3
  */
 public class FacesUtil {
 
     public static String getRequestParameter(String name) {
-        return (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(name);
+        Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        if(map.containsKey(name))
+            return (String) map.get(name);
+        return null;
     }
-
+    
     public static String getRequestURL() {
         return (String) ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURL().toString();
     }
@@ -42,7 +48,7 @@ public class FacesUtil {
     public static String getMessage(String bundleName, String key) {
         return ResourceBundle.getBundle(bundleName).getString(key);
     }
-
+    
     public static Object getSessionAttribute(String key) {
         return ((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).getAttribute(key);
     }

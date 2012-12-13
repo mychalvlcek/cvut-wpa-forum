@@ -34,15 +34,6 @@
             logout-success-url="/index.xhtml" />
     </security:http>
 
-    <!--
-    <http>
-        <form-login />
-        <http-basic />
-        <intercept-url pattern="/admin/*" access="ROLE_USER" />
-        <logout />
-    </http>
-    -->
-
     <beans:bean id="AuthenticationProvider" class="cz.cvut.wpa.forum.service.AuthenticationService">
         <beans:property name="genericDAO" ref="genericDao" />
         <beans:property name="transactionTemplate" ref="transactionTemplate" />

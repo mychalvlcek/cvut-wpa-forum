@@ -21,7 +21,7 @@ public class RoleServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testAddAndRetrieveRole() {
-        String name = "role1";
+        String name = "ROLE_USER";
         Long id = roleService.addRole(name);
         List<RoleDto> roles = roleService.getAllRoles();
         assertEquals(1, roles.size());

@@ -143,6 +143,10 @@
 .post-block span.status {
     margin: 2px;
 }
+.post-block .media-body {
+    padding-left: 20px;
+    border-left: 5px solid #eee;
+}
 .new-message textarea {
     width:520px;
     height:150px;
@@ -166,7 +170,12 @@
 .profile .img-polaroid {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
 }
-
+.accordion-toggle {
+    
+}
+.accordion-toggle:hover {
+    text-decoration: none;
+}
 /* ALERTS */
 .alert ul {
     list-style-type: none;

@@ -12,7 +12,7 @@
     <div class="row profile">
         <div class="span2">
             <!--get the user using the request parameter-->
-            <h:graphicImage class="img-polaroid" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="Alternate text" />
+            <h:graphicImage class="img-polaroid" width="160" url="/resources/img/#{profile.user.id}.jpg" alt="Alternate text" />
             <h1 class="profile-username"><h:outputText value="#{profile.user.userName}"/></h1>
             <ul class="nav-list info">
                 <li><i class="icon-eye-open"></i> <span class="muted">status</span> <span class="label label-success">ONLINE</span></li>
@@ -31,144 +31,35 @@
         </div>
         <div class="span10">
             <div class="bs-docs-example">
-            <ul id="myTab" class="nav nav-tabs">
-                <li class="active"><a href="#profile" data-toggle="tab">#{msgs['page.profile.tabs.profile']}</a></li>
-                <li><a href="#messages" data-toggle="tab">#{msgs['page.profile.tabs.messages']}</a></li>
-                <li><a href="#posts" data-toggle="tab">#{msgs['page.profile.tabs.last_posts']}</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msgs['page.profile.tabs.edit']} <i class="icon-wrench"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#dropdown1" data-toggle="tab">@Změna hesla</a></li>
-                        <li><a href="#dropdown2" data-toggle="tab">@Upravit profil</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-                <!-- #profile -->
-                <div class="tab-pane fade active in" id="profile">
-                    <h1>Bootstrap starter template</h1>
-                    <blockquote>
-                        <p class="lead">Use this document as a way to quick start any new project.<br /> All you get is this message and a barebones HTML document.</p>
-                        <small>@twitter</small>
-                    </blockquote>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                    <address>
-                        <strong>Twitter, Inc.</strong><br />
-                        795 Folsom Ave, Suite 600<br />
-                        San Francisco, CA 94107<br />
-                        <abbr title="Phone">P:</abbr> (123) 456-7890
-                    </address>
-                    <address>
-                        <strong>Full Name</strong><br />
-                        <a href="mailto:#" rel="tooltip" title="first tooltip">first.last@gmail.com</a>
-                    </address>
-                </div>
-              
-                <!-- #messages -->
-                <div class="tab-pane fade" id="messages">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Předmět</th>
-                                <th>Autor</th>
-                                <th>Čas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>14354534</td>
-                                <td><a href="/wpa-forum/topic.xhtml#post">Předmět #1</a></td>
-                                <td><a href="/wpa-forum/profile.xhtml">username</a></td>
-                                <td>2012-12-31 13:34:54</td>
-                            </tr>
-                      
-                            <tr>
-                        <td>2342342</td>
-                        <td>Best HW</td>
-                        <td>2012-12-31 13:30:24</td>
-                        <td>Hardware</td>
-                      </tr>
-                      <tr>
-                        <td>14354534</td>
-                        <td>Title of 1st topic</td>
-                        <td>2012-12-31 13:34:54</td>
-                        <td>Software</td>
-                      </tr>
-                      <tr>
-                        <td>3354</td>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                      <tr>
-                        <td>14354534</td>
-                        <td>Title of 1st topic</td>
-                        <td>2012-12-31 13:34:54</td>
-                        <td>Software</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="pagination">
-                    <ul>
-                      <li><a href="#">Prev</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">Next</a></li>
-                    </ul>
-                  </div>
-              </div>
-              
-                <!-- #posts -->
-                <div class="tab-pane fade" id="posts">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>#{msgs['page.profile.tabs.last_posts.topic']}</th>
-                                <th>#{msgs['page.profile.tabs.last_posts.time']}</th>
-                                <th>#{msgs['page.profile.tabs.last_posts.category']}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ui:repeat value="#{profile.user.posts}" var="post">
-                            <tr>
-                                <td>#{post.id}</td>
-                                <td>
-                                    <h:outputLink value="/wpa-forum/topic.xhtml" title="vlcekmi3's profile" styleClass="last-post-username">
-                                        <f:param name="id" value="#{topic.author}" />
-                                        <h:outputText value="#{topic.author}" />
-                                    </h:outputLink>
-                                    <a href="/wpa-forum/topic.xhtml#post">#{post.title}Title</a></td>
-                                <td>#{post.updated}</td>
-                                <td><a href="/wpa-forum/category.xhtml">#{post.topic}Title of topic</a></td>
-                            </tr>
-                            </ui:repeat>
-                        </tbody>
-                    </table>
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">Prev</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">Next</a></li>
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active"><a href="#profile" data-toggle="tab">#{msgs['page.profile.tabs.profile']}</a></li>
+                    <li><a href="#messages" data-toggle="tab">#{msgs['page.profile.tabs.messages']}</a></li>
+                    <li><a href="#posts" data-toggle="tab">#{msgs['page.profile.tabs.last_posts']}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{msgs['page.profile.tabs.edit']} <i class="icon-wrench"></i> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#password" data-toggle="tab">@Změna hesla</a></li>
+                            <li><a href="#edit" data-toggle="tab">@Upravit profil</a></li>
                         </ul>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <!-- #profile -->
+                    <ui:include src="profile_info.xhtml"/>
+                    <!-- #message -->
+                    <ui:include src="profile_messages.xhtml"/>
+                    <!-- #posts -->
+                    <ui:include src="profile_posts.xhtml"/>
+                    <!-- #password -->
+                    <div class="tab-pane fade" id="password">
+                        <p class="lead muted">Nefunkční!</p>
+                    </div>
+                    <!-- #edit -->
+                    <div class="tab-pane fade" id="edit">
+                        <p class="lead muted">Také nefunkční..</p>
                     </div>
                 </div>
-                <!-- end #posts -->
-                
-              <div class="tab-pane fade" id="dropdown1">
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-              </div>
-              <div class="tab-pane fade" id="dropdown2">
-                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-              </div>
             </div>
-          </div>
         </div>
     </div>
     </ui:define>

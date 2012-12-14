@@ -6,14 +6,23 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:sec="http://www.springframework.org/security/facelets/tags">
-
+    <!-- nacteni id z URL a init categorie -->
+    <f:metadata>
+        <f:viewParam name="id" value="#{newTopic.categoryId}" />
+        <f:event listener="#{newTopic.init}" type="preRenderView"/>
+    </f:metadata>
+    
     <ui:define name="title">Nové téma</ui:define>
     <ui:define name="content">
         <!-- new topic title -->
-        <h1>Vytvoření nového tématu</h1>
+        <h1>Vytvoření nového tématu - #{newTopic.category.title}</h1>
         <!-- new topic -->
         <sec:isAuthenticated>
         <h:form>
+        <h:outputLink value="/wpa-forum/category.xhtml">
+            <f:param name="id" value="#{newTopic.categoryId}" />
+            <h:outputText value="Zpět" />
+        </h:outputLink>
         <div class="media post-block" id="new-post">
             <div class="label-block">
                 <a href="/wpa-forum/profile.xhtml" class="username"><i class="icon-user"></i> #{loggedUser.username()}</a>
@@ -25,7 +34,8 @@
             </div>
             <div class="media-body">
                 <h:form>
-                    <input type="hidden" name="category" value="#{newTopic.category.id}" />
+                    <p>Title</p>
+                    <input type="hidden" name="category" value="#{newTopic.categoryId}" />
                     <h:inputText id="title" value="#{newTopic.title}" styleClass="input-xlarge" />
                 </h:form>
                 <br />

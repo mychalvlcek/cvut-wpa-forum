@@ -26,10 +26,11 @@ public class Register {
     @Autowired
     protected UserService userService;
     
-    public void storeUser() throws IOException {
+    public String storeUser() throws IOException {
         userService.addUser(getUsername(), getPassword(), getEmail(), getIsAdmin());
         FacesUtil.addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Úspěch!", "Registrace proběhla úspěšně."));
-        FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        //FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?new=1");
+        return "index";
     }
 
     public String getUsername() {

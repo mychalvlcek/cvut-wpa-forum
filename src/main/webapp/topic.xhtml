@@ -6,6 +6,11 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:sec="http://www.springframework.org/security/facelets/tags">
+    <!-- nacteni id z URL a init kategorie -->
+    <f:metadata>
+        <f:viewParam name="id" value="#{topic.topicId}" />
+        <f:event listener="#{topic.init}" type="preRenderView"/>
+    </f:metadata>
 
     <ui:define name="title">#{msgs['application.name']}</ui:define>
     <ui:define name="content">
@@ -30,7 +35,9 @@
                     <f:param name="id" value="#{topic.category.id}" />
                     <h:outputText value="Zpět k výpisu témat" />
                 </h:outputLink>
-                <button class="btn"><i class="icon-share-alt"></i> Odpovědět</button>
+                <sec:isAuthenticated>
+                    <a href="#reply" class="btn"><i class="icon-share-alt"></i> Odpovědět</a>
+                </sec:isAuthenticated>
             </div>
             <div class="btn-group pull-right">
               <button class="btn">1</button>
@@ -39,26 +46,30 @@
             </div>
         </div>
         <hr />
-
+        <ui:fragment rendered="#{empty topic.posts}">
+            <p class="lead muted">Nebyly nalezeny žádné příspěvky pro toto téma.</p>
+        </ui:fragment>
         <!-- post -->
         <ui:repeat value="#{topic.posts}" var="post">
             <!-- anchor -->
             <a name="#{post.id}"></a>
             <div class="media post-block" id="post">
-                <div class="btn-group pull-right actions">
-                    <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Akce <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Upravit</a></li>
-                        <li><a href="#">Smazat</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div>
+                <!-- akce -->
+                <sec:isAuthenticated>
+                    <h:form>
+                        <div class="btn-group pull-right actions">
+                            <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Akce <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Upravit</a></li>
+                                <li><h:commandLink value="Smazat" actionListener="#{topic.deletePost(post.id)}"/></li>
+                            </ul>
+                        </div>
+                    </h:form>
+                </sec:isAuthenticated>
                 <div class="label-block">
-                    <h:outputLink value="/wpa-forum/profile.xhtml" title="vlcekmi3's profile" styleClass="username">
+                    <h:outputLink value="/wpa-forum/profile.xhtml" title="#{post.user.userName}'s profile" styleClass="username">
                         <f:param name="id" value="#{post.author}" />
-                        <i class="icon-user"></i>
-                        <h:outputText value="#{post.author}" />
+                        <i class="icon-user"></i><h:outputText value=" #{post.user.userName}" />
                     </h:outputLink>
                     <span class="posted">
                         <em>
@@ -69,16 +80,18 @@
                     </span>
                 </div>
                 <div class="pull-left">
-                    <h:outputLink value="/wpa-forum/profile.xhtml" title="vlcekmi3's profile">
+                    <h:outputLink value="/wpa-forum/profile.xhtml" title="#{post.user.userName}'s profile">
                         <f:param name="id" value="#{post.author}" />
-                        <h:graphicImage class="media-object img-rounded" width="64" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="vlcekmi3's avatar" />
+                        <h:graphicImage class="media-object img-rounded" width="64" url="/resources/img/#{post.author}.jpg" alt="vlcekmi3's avatar" />
                     </h:outputLink>
                     <span class="label label-success status">ON-LINE</span><br />
-                    <a href="#myModal" data-toggle="modal" data-target="#myModal" rel="tooltip" title="Nová zpráva" data-placement="right"><i class="icon-envelope"></i></a>
+                    <sec:isAuthenticated>
+                        <a href="#myModal" data-toggle="modal" data-target="#myModal" rel="tooltip" title="Nová zpráva" data-placement="right"><i class="icon-envelope"></i></a>
+                    </sec:isAuthenticated>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">#{post.title}</h4>
-                    <p>#{post.content}</p>
+                    <p><h:outputText escape="false" value="#{post.content}" /></p>
                 </div>
             </div>
         </ui:repeat>
@@ -100,30 +113,35 @@
         </div>
     
         <!-- new post -->
+        <a name="reply"></a>
         <h4>Nový příspěvek</h4>
         <h:form>
         <div class="media post-block" id="new-post">
             <div class="label-block">
-                <a href="/wpa-forum/profile.xhtml" class="username"><i class="icon-user"></i> #{loggedUser.username()}</a>
+                <h:outputLink value="/wpa-forum/profile.xhtml" title="#{loggedUser.username()}'s profile" styleClass="username">
+                    <f:param name="id" value="#{loggedUser.id()}" />
+                    <i class="icon-user"></i><h:outputText value=" #{loggedUser.username()}" />
+                </h:outputLink>
             </div>
             <div class="pull-left">
-                <a href="/wpa-forum/profile.xhtml">
-                    <h:graphicImage class="media-object img-rounded" width="64" url="http://en.gravatar.com/userimage/40148602/dc345e85f6dc02f97e5d1ad7e291a15f.jpg?size=160" alt="Alternate text" />
-                </a>
+                <h:outputLink value="/wpa-forum/profile.xhtml" title="#{loggedUser.username()}'s profile">
+                    <f:param name="id" value="#{loggedUser.id()}" />
+                    <h:graphicImage class="media-object img-rounded" width="64" url="/resources/img/#{loggedUser.id()}.jpg" alt="vlcekmi3's avatar" />
+                </h:outputLink>
             </div>
             <div class="media-body">
                 <h:form>
-                    <input type="hidden" name="topic" value="#{topic.topic.id}" />
-                    <h:inputText id="title" value="#{post.title}" styleClass="input-xlarge" />
-                    <p:editor id="editor" value="#{post.content}" width="980" controls="bold italic underline strikethrough subscript superscript | bullets | undo redo | rule image link unlink | cut copy paste pastetext | source" />
+                    <input type="hidden" name="topic" value="#{topic.topicId}" />
+                    <h:inputText id="title" value="#{topic.title}" styleClass="input-xlarge" />
+                    <p:editor id="editor" value="#{topic.content}" width="980" controls="bold italic underline strikethrough subscript superscript | bullets | undo redo | rule image link unlink | cut copy paste pastetext | source" />
                 </h:form>
-                <h:commandButton class="btn btn-primary" action="#{post.storePost}" value="Odeslat"/>
-                <button type="button" class="btn">Náhled</button>
-                <button type="button" class="btn">Zrušit</button>
+                <h:commandButton class="btn btn-primary" action="#{topic.storePost}" value="Odeslat"/>
+                <button type="reset" class="btn">Zrušit</button>
             </div>
         </div>
         </h:form>
         </sec:isAuthenticated>
+        <ui:fragment rendered="#{not empty topic.posts}">
         <hr />
         <div class="btn-toolbar">
             <div class="btn-group">
@@ -140,5 +158,6 @@
               <button class="btn">3</button>
             </div>
         </div>
+        </ui:fragment>
     </ui:define>
 </ui:composition>

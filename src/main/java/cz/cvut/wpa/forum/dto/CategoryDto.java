@@ -21,13 +21,6 @@ public class CategoryDto extends AbstractDto {
         this.topics = topics;
     }
 
-    /*
-    public CategoryDto(Long id, String title, List<TopicDto> topics) {
-        this.id = id;
-        this.title = title;
-        this.topicX = topics;
-    }
-    */
     public String getTitle() {
         return title;
     }

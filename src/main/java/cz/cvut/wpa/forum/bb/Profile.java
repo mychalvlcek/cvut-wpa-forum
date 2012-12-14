@@ -1,11 +1,15 @@
 package cz.cvut.wpa.forum.bb;
 
+import cz.cvut.wpa.forum.dto.MessageDto;
+import cz.cvut.wpa.forum.dto.PostDto;
 import cz.cvut.wpa.forum.dto.UserDto;
 import cz.cvut.wpa.forum.helper.FacesUtil;
+import cz.cvut.wpa.forum.service.MessageService;
 import cz.cvut.wpa.forum.service.PostService;
 import cz.cvut.wpa.forum.service.UserService;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -27,6 +31,8 @@ public class Profile {
     @Autowired
     protected UserService userService;
     @Autowired
+    protected MessageService messageService;
+    @Autowired
     protected PostService postService;
 
     @PostConstruct
@@ -46,6 +52,22 @@ public class Profile {
 
     public void setUser(UserDto user) {
         this.user = user;
+    }
+    
+    /**
+     * Returns users messages
+     * @return list of messages
+     */
+    public List<MessageDto> getMessages() {
+        return messageService.getUsersMessages(user.getId());
+    }
+    
+    /**
+     * Returns users posts
+     * @return list of posts
+     */
+    public List<PostDto> getPosts() {
+        return postService.getUsersPosts(user.getId());
     }
     
     /**

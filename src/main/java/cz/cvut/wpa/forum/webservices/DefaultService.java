@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Path("/a")
-public class RestBookService {
+public class DefaultService {
     
     @Autowired
     private UserService userService;

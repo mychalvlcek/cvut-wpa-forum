@@ -47,10 +47,10 @@ public class TopicServiceImpl extends AbstractDataAccessService implements Topic
 
     @Override
     public List<TopicDto> getTopicsByCategory(Long categoryId) {
-        List<Topic> topics = genericDao.getByProperty("category", genericDao.loadById(categoryId, Category.class), Topic.class);
+        List<Topic> topics = genericDao.getByProperty("category", genericDao.loadById(categoryId, Category.class), Topic.class, "DESC");
         List<TopicDto> topicDtos = new ArrayList<TopicDto>();
         for (Topic t : topics) {
-            topicDtos.add(new TopicDto(t.getId(), t.getTitle(), HibernateTools.getIdentifier(t.getAuthor()), HibernateTools.getIdentifier(t.getCategory()) ,DtoTransformerHelper.getIdentifiers(t.getPosts()), t.getCreated(), t.getUpdated()));
+            topicDtos.add(new TopicDto(t.getId(), t.getTitle(), HibernateTools.getIdentifier(t.getAuthor()), HibernateTools.getUserDto(t.getAuthor()), HibernateTools.getIdentifier(t.getCategory()) ,DtoTransformerHelper.getIdentifiers(t.getPosts()), t.getCreated(), t.getUpdated()));
         }
         return topicDtos;
     }

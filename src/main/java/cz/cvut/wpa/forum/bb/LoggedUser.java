@@ -1,6 +1,10 @@
 package cz.cvut.wpa.forum.bb;
 
 import cz.cvut.wpa.forum.components.LoggedUserDetails;
+import cz.cvut.wpa.forum.helper.FacesUtil;
+import java.io.IOException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;

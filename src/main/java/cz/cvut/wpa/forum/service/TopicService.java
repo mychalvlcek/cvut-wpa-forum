@@ -4,6 +4,7 @@ import cz.cvut.wpa.forum.bo.User;
 import cz.cvut.wpa.forum.dto.PostDto;
 import cz.cvut.wpa.forum.dto.TopicDto;
 import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -26,6 +27,7 @@ public interface TopicService {
      * Permanently removes the topic
      * @param topicId id of the topic to be removed
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteTopic(Long topicId);
     
     /**

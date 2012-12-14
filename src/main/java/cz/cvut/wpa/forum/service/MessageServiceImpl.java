@@ -48,8 +48,7 @@ public class MessageServiceImpl extends AbstractDataAccessService implements Mes
     }
     @Override
     public List<MessageDto> getUsersMessages(Long userId) {
-        List<Message> messages = genericDao.getByProperty("author", genericDao.loadById(userId, User.class), Message.class);
-        //List<Message> InMessages = genericDao.getByProperty("recipient", genericDao.loadById(userId, User.class), Message.class);
+        List<Message> messages = genericDao.getByProperty("recipient", genericDao.loadById(userId, User.class), Message.class, "DESC");
         List<MessageDto> messageDtos = new ArrayList<MessageDto>();
         
         for(Message m : messages) {

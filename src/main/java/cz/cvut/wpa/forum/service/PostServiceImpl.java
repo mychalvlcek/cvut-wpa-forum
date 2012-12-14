@@ -32,6 +32,11 @@ public class PostServiceImpl extends AbstractDataAccessService implements PostSe
     public void deletePost(Long postId) {
         genericDao.removeById(postId, Post.class);
     }
+    
+    @Override
+    public void deletePostByTopic(Long topicId) {
+        genericDao.removeByProperty("topic", genericDao.loadById(topicId, Topic.class),Post.class);
+    }
 
     @Override
     public List<PostDto> getAllPosts() {
@@ -42,6 +47,12 @@ public class PostServiceImpl extends AbstractDataAccessService implements PostSe
             postDtos.add(new PostDto(p.getId(), p.getTitle(), p.getContent(), HibernateTools.getIdentifier(p.getAuthor()), HibernateTools.getIdentifier(p.getTopic()), p.getCreated(), p.getUpdated()));
         }
         return postDtos;        
+    }
+    
+    @Override
+    public PostDto getPostById(Long postId) {
+        Post p = genericDao.getById(postId, Post.class);
+        return new PostDto(p.getId(), p.getTitle(), p.getContent(), HibernateTools.getIdentifier(p.getAuthor()), HibernateTools.getUserDto(p.getAuthor()), HibernateTools.getIdentifier(p.getTopic()), p.getCreated(), p.getUpdated());
     }
     
     @Override
@@ -57,7 +68,7 @@ public class PostServiceImpl extends AbstractDataAccessService implements PostSe
     
     @Override
     public List<PostDto> getUsersPosts(Long userId) {
-        List<Post> posts = genericDao.getByProperty("author", genericDao.loadById(userId, User.class), Post.class);
+        List<Post> posts = genericDao.getByProperty("author", genericDao.loadById(userId, User.class), Post.class, "DESC");
         List<PostDto> postDtos = new ArrayList<PostDto>();
         
         for(Post p : posts) {

@@ -2,6 +2,7 @@ package cz.cvut.wpa.forum.service;
 
 import cz.cvut.wpa.forum.dto.PostDto;
 import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -22,7 +23,11 @@ public interface PostService {
      * Deletes post from the system
      * @param postId idenfier of the post to be removed
      */
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void deletePost(Long postId);
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void deletePostByTopic(Long topicId);
     /**
      * Get all posts stored in the system
      * @return 
@@ -30,6 +35,7 @@ public interface PostService {
     @Transactional(readOnly=true)
     public List<PostDto> getAllPosts();
     
+    public PostDto getPostById(Long postId);
     /**
      * Get all posts from given topic
      * @param topicId identifier of the topic

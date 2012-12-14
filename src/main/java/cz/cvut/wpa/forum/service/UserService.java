@@ -25,7 +25,7 @@ public interface UserService {
      * Permanently removes the user
      * @param userId id of the user to be removed
      */
-    @PreAuthorize("hasRole(['ROLE_ADMIN'])")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteUser(Long userId);
     
     /**

@@ -37,10 +37,10 @@ public class GenericHibernateJpaDao implements GenericDao {
     public <ENTITY> List<ENTITY> getAll(Class<ENTITY> clazz) {
         return getEntityManager().createQuery("SELECT e FROM " + clazz.getSimpleName() + " e").getResultList();
     }
-
+ 
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getAllOrderedDesc(String property, Class<ENTITY> clazz) {
-        throw new IllegalStateException("Not implemented yet");
+        return getEntityManager().createQuery("SELECT e FROM " + clazz.getSimpleName() + " e ORDER BY e.updated DESC").getResultList();
     }
 
     @SuppressWarnings("unchecked")
@@ -51,6 +51,12 @@ public class GenericHibernateJpaDao implements GenericDao {
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getByProperty(String property, Object value, Class<ENTITY> clazz) {
         String queryString = "SELECT e FROM " + clazz.getSimpleName() + " e WHERE e." + property + " = :value";
+        return getEntityManager().createQuery(queryString).setParameter("value", value).getResultList();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public <ENTITY> List<ENTITY> getByProperty(String property, Object value, Class<ENTITY> clazz, String order) {
+        String queryString = "SELECT e FROM " + clazz.getSimpleName() + " e WHERE e." + property + " = :value ORDER BY e.updated " + order;
         return getEntityManager().createQuery(queryString).setParameter("value", value).getResultList();
     }
 

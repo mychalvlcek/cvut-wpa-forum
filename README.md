@@ -8,10 +8,10 @@ možnost pouze pasivního prohlížení webu bez žádné větší interakce, za
 role mají podstatně větší možnosti.
 
 ###### Funkční části:
-* Registrace uživatele
+* Registrace uživatele (vlastní validátor)
 * Příhlášení uživatele (skrze Spring Security)
 * Vypisování "správných" dat při průchodu webem (kategorie-témata-příspěvky)
-* skoroCRUD témat, příspěvků
+* poloCRUD témat, příspěvků
 * Ukázka zabezpečené části aplikace (/admin) + zabezpečené fragmenty stránek
 * Implementace *JAX-RS* jen okrajově (jakože funguje)
 * Vlastní (upravená) komponenta pro vykreslování messages

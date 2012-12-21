@@ -16,9 +16,19 @@ public interface PostService {
      * Add post to the system
      * @param title title of the post
      * @param author id of the author
+     * @param topic id of the topic
      * @return identifier of the newly added post
      */
     public Long addPost(String title, String content, Long author, Long topic);
+    /**
+     * Update post
+     * @param id id of edited post
+     * @param title title of the post
+     * @param author id of the author
+     * @param topic id of the topic
+     * @return identifier of the newly added post
+     */
+    public Long updatePost(Long id, String title, String content, Long author, Long topic);
     /**
      * Deletes post from the system
      * @param postId idenfier of the post to be removed

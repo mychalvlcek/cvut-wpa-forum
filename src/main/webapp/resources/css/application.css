@@ -137,6 +137,9 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
+.post-block .admin-block {
+    margin: 0;
+}
 .post-block .actions {
     margin-top:-30px;
 }
@@ -170,10 +173,17 @@
 .profile .img-polaroid {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
 }
-.accordion-toggle {
-    
+
+.profile .message-block {
+    background: #fdfdfd;
 }
-.accordion-toggle:hover {
+.profile .message-block:hover {
+    background: #fcfcfc;
+}
+.profile .message-block .accordion-toggle span.muted {
+    margin-right: 20px;
+}
+.profile .message-block .accordion-toggle:hover {
     text-decoration: none;
 }
 /* ALERTS */

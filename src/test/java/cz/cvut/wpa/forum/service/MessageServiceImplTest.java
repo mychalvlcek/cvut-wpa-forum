@@ -35,15 +35,14 @@ public class MessageServiceImplTest extends AbstractServiceTest {
         String content = "Obsah";
 
         Long postId = messageService.addMessage(title, content, userId, recipientId);
-        messageService.addMessage(title, content, recipientId, userId);
-        List<MessageDto> messages = messageService.getUsersMessages(userId);
+        List<MessageDto> messages = messageService.getUsersMessages(recipientId);
         assertEquals(1, messages.size());
 
         MessageDto message = messages.get(0);
 
         assertEquals(title, message.getTitle());
-        assertEquals(userId, message.getAuthor());
-        assertEquals(recipientId, message.getRecipient());
+        assertEquals(userId, message.getAuthor().getId());
+        assertEquals(recipientId, message.getRecipient().getId());
         assertEquals(postId, message.getId());
     }
 
@@ -60,10 +59,9 @@ public class MessageServiceImplTest extends AbstractServiceTest {
         Long message2Id = messageService.addMessage(title, content, userId, recipientId);
         Long message3Id = messageService.addMessage(title, content, recipientId, userId);
         assertEquals(3, messageService.getAllMessages().size());
-        messageService.deleteUsersMessages(userId);
-        //assertEquals(1, messageService.getAllMessages().size());
+        //messageService.deleteUsersMessages(recipientId);
         messageService.deleteMessage(message3Id);
-        //assertEquals(0, messageService.getAllMessages().size());
+        assertEquals(2, messageService.getAllMessages().size());
     }
     
     @Test

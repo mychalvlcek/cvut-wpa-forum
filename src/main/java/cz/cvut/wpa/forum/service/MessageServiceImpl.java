@@ -38,13 +38,13 @@ public class MessageServiceImpl extends AbstractDataAccessService implements Mes
         List<MessageDto> messageDtos = new ArrayList<MessageDto>();
         
         for(Message m : messages) {
-            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient()), m.getCreated(), m.getUpdated()));
+            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getUserDto(m.getAuthor()), HibernateTools.getUserDto(m.getRecipient()), m.getCreated(), m.getUpdated()));
         }
         return messageDtos;        
     }
     @Override
     public void deleteUsersMessages(Long userId) {
-        genericDao.removeByProperty("author", genericDao.loadById(userId, User.class), Message.class);
+        genericDao.removeByProperty("recipient", genericDao.loadById(userId, User.class), Message.class);
     }
     @Override
     public List<MessageDto> getUsersMessages(Long userId) {
@@ -52,7 +52,7 @@ public class MessageServiceImpl extends AbstractDataAccessService implements Mes
         List<MessageDto> messageDtos = new ArrayList<MessageDto>();
         
         for(Message m : messages) {
-            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getIdentifier(m.getAuthor()), HibernateTools.getIdentifier(m.getRecipient()), m.getCreated(), m.getUpdated()));
+            messageDtos.add(new MessageDto(m.getId(), m.getTitle(), m.getContent(), HibernateTools.getUserDto(m.getAuthor()), HibernateTools.getUserDto(m.getRecipient()), m.getCreated(), m.getUpdated()));
         }
         return messageDtos;
     }

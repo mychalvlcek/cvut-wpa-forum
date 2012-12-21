@@ -15,13 +15,13 @@
         <ui:fragment rendered="#{not empty profile.messages}">
             <div class="accordion" id="accordion2">
                 <ui:repeat value="#{profile.messages}" var="msg">
-                <div class="accordion-group">
+                <div class="accordion-group message-block">
                     <div class="accordion-heading">
                         <a class="accordion-toggle" rel="tooltip" title="#{msg.created}" data-placement="left" data-toggle="collapse" data-parent="#accordion2" href="##{msg.id}">
                             <h:outputText styleClass="muted" value="#{msg.created}" >
                                 <f:convertDateTime pattern="dd.MM. yyyy, HH:mm" />
                             </h:outputText>
-                            #{msg.title}
+                            #{msg.title} <h:outputText styleClass="muted" value=" - #{msg.author.userName}" />
                         </a>
                     </div>
                     <div id="#{msg.id}" class="accordion-body collapse">

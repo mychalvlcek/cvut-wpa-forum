@@ -26,13 +26,13 @@
                     <ui:repeat value="#{profile.posts}" var="post">
                     <tr>
                         <td>#{post.id}</td>
-                        <td><h:link outcome="topic.xhtml?id=#{post.topic}" value="#{post.title}" /></td>
+                        <td><h:link outcome="topic.xhtml?id=#{post.topic.id}" value="#{post.title}" /></td>
                         <td>
                             <h:outputText value="#{post.updated}" >
                                 <f:convertDateTime pattern="dd.MM. yyyy, HH:mm" />
                             </h:outputText>
                         </td>
-                        <td><h:link outcome="topic.xhtml?id=#{post.topic}" value="#{post.topic}" /></td>
+                        <td><h:link outcome="topic.xhtml?id=#{post.topic.id}" value="#{post.topic.title}" /></td>
                     </tr>
                     </ui:repeat>
                 </tbody>

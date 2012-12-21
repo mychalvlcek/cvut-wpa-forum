@@ -20,10 +20,10 @@ import org.springframework.stereotype.Component;
  * @author vlcekmi3
  */
 @Component
-@Scope(value="request")
+@Scope(value="view")
 public class Topic {
     
-    private Long topicId = 0L;
+    private Long topicId;
     private TopicDto topic;
     
     private String title;
@@ -54,7 +54,6 @@ public class Topic {
     }
     
     public void deletePost(Long id) throws IOException {
-        topicId = Long.parseLong(FacesUtil.getRequestParameter("topic"));
         postService.deletePost(id);
         FacesUtil.addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Příspěvek", "Byl smazán."));
         FacesContext.getCurrentInstance().getExternalContext().redirect("topic.xhtml?id=" + topicId + "&del=1");

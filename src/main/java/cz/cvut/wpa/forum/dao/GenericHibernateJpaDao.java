@@ -56,7 +56,7 @@ public class GenericHibernateJpaDao implements GenericDao {
     
     @SuppressWarnings("unchecked")
     public <ENTITY> List<ENTITY> getByProperty(String property, Object value, Class<ENTITY> clazz, String order) {
-        String queryString = "SELECT e FROM " + clazz.getSimpleName() + " e WHERE e." + property + " = :value ORDER BY e.updated " + order;
+        String queryString = "SELECT e FROM " + clazz.getSimpleName() + " e WHERE e." + property + " = :value ORDER BY e.id " + order;
         return getEntityManager().createQuery(queryString).setParameter("value", value).getResultList();
     }
 

@@ -58,9 +58,9 @@ public class AbstractBusinessObject implements Serializable {
      */
     @PreUpdate
     @PrePersist
-    public void updateTimeStamps() { 
+    public void updateTimeStamps() {
         updated = new Date();
-        if (created==null) {
+        if (created == null) {
             created = new Date();
         }
     }

@@ -48,7 +48,7 @@ public class PostServiceImplTest extends AbstractServiceTest {
         PostDto post = posts.get(0);
 
         assertEquals(title, post.getTitle());
-        assertEquals(userId, post.getAuthor());
+        assertEquals(userId, post.getAuthor().getId());
         assertEquals(postId, post.getId());
     }
 

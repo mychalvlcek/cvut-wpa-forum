@@ -12,7 +12,7 @@
         <f:event listener="#{topic.init}" type="preRenderView"/>
     </f:metadata>
 
-    <ui:define name="title">#{msgs['application.name']}</ui:define>
+    <ui:define name="title">[T] #{topic.topic.title}</ui:define>
     <ui:define name="content">
         <!-- topic title -->
         <h1>#{topic.topic.title}</h1>
@@ -40,9 +40,9 @@
                 </sec:isAuthenticated>
             </div>
             <div class="btn-group pull-right">
-              <button class="btn">1</button>
-              <button class="btn">2</button>
-              <button class="btn">3</button>
+              <button class="btn" rel="tooltip" title="Přejít na stranu: 1">1</button>
+              <button class="btn" rel="tooltip" title="Přejít na stranu: 2">2</button>
+              <button class="btn" rel="tooltip" title="Přejít na stranu: 3">3</button>
             </div>
         </div>
         <hr />
@@ -56,33 +56,45 @@
             <div class="media post-block" id="post">
                 <!-- akce -->
                 <sec:isAuthenticated>
-                    <h:form>
+                    <h:form styleClass="admin-block" rendered="#{loggedUser.id() == post.author.id || loggedUser.id() == 3}">
                         <div class="btn-group pull-right actions">
                             <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Akce <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Upravit</a></li>
+                                <li>
+                                    <h:outputLink value="post_edit.xhtml">
+                                        <f:param name="id" value="#{post.id}" />
+                                        <h:outputText value="Upravit" />
+                                    </h:outputLink>
+                                </li>
                                 <li><h:commandLink value="Smazat" actionListener="#{topic.deletePost(post.id)}"/></li>
                             </ul>
                         </div>
                     </h:form>
                 </sec:isAuthenticated>
                 <div class="label-block">
-                    <h:outputLink value="/wpa-forum/profile.xhtml" title="#{post.user.userName}'s profile" styleClass="username">
-                        <f:param name="id" value="#{post.author}" />
-                        <i class="icon-user"></i><h:outputText value=" #{post.user.userName}" />
+                    <h:outputLink value="/wpa-forum/profile.xhtml" title="#{post.author.userName}'s profile" styleClass="username">
+                        <f:param name="id" value="#{post.author.id}" />
+                        <i class="icon-user"></i><h:outputText value=" #{post.author.userName}" />
                     </h:outputLink>
                     <span class="posted">
                         <em>
-                            <h:outputText value="#{post.updated}" >
+                            <h:outputText value="#{post.created}" >
                                 <f:convertDateTime pattern="dd.MM. yyyy, HH:mm" />
                             </h:outputText>
+                            <!-- naposledy upraveno -->
+                            <ui:fragment rendered="#{post.created != post.updated}">
+                                upraveno
+                                <h:outputText value="#{post.updated}" >
+                                    <f:convertDateTime pattern="dd.MM. yyyy, HH:mm" />
+                                </h:outputText>
+                            </ui:fragment>
                         </em>
                     </span>
                 </div>
                 <div class="pull-left">
-                    <h:outputLink value="/wpa-forum/profile.xhtml" title="#{post.user.userName}'s profile">
-                        <f:param name="id" value="#{post.author}" />
-                        <h:graphicImage class="media-object img-rounded" width="64" url="/resources/img/#{post.author}.jpg" alt="vlcekmi3's avatar" />
+                    <h:outputLink value="/wpa-forum/profile.xhtml" title="#{post.author.userName}'s profile">
+                        <f:param name="id" value="#{post.author.id}" />
+                        <h:graphicImage class="media-object img-rounded" width="64" url="/resources/img/#{post.author.id}.jpg" alt="vlcekmi3's avatar" />
                     </h:outputLink>
                     <span class="label label-success status">ON-LINE</span><br />
                     <sec:isAuthenticated>

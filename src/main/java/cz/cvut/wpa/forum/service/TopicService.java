@@ -51,8 +51,5 @@ public interface TopicService {
      */
     @Transactional(readOnly=true)
     public TopicDto getTopicById(Long id);
-    
-    @Transactional(readOnly=true)
-    public PostDto getLastPostFromTopic(Long id);
-    
+
 }

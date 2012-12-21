@@ -11,7 +11,7 @@
         <f:event listener="#{category.init}" type="preRenderView"/>
     </f:metadata>
 
-    <ui:define name="title">#{msgs['application.name']}</ui:define>
+    <ui:define name="title">[C] #{category.category.title}</ui:define>
     <ui:define name="content">
         <!-- category title -->
         <h1>#{category.category.title}</h1>
@@ -29,7 +29,7 @@
             <div class="btn-group">
                 <a class="btn" href="/wpa-forum/"><i class="icon-arrow-left"></i> Zpět na seznam kategorií</a>
                 <sec:isAuthenticated>
-                    <h:outputLink value="new_topic.xhtml" styleClass="btn">
+                    <h:outputLink value="topic_edit.xhtml" styleClass="btn">
                         <i class="icon-plus"></i>
                         <f:param name="id" value="#{category.category.id}" />
                         <h:outputText value="Nové téma" />

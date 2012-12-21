@@ -23,7 +23,17 @@
                 <value>/WEB-INF/properties/jpa.properties</value>
             </list>
         </property>
-    </bean>        
+    </bean>
+    <!-- View scope support -->
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="view">
+                    <bean class="cz.cvut.wpa.forum.components.ViewScope" />
+                </entry>
+            </map>
+        </property>
+    </bean>
     <!-- Connection pool -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>

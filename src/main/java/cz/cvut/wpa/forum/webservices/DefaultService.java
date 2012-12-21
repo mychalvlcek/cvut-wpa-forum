@@ -1,7 +1,7 @@
 package cz.cvut.wpa.forum.webservices;
 
-import cz.cvut.wpa.forum.dto.UserDto;
-import cz.cvut.wpa.forum.service.UserService;
+import cz.cvut.wpa.forum.dto.TopicDto;
+import cz.cvut.wpa.forum.service.TopicService;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -25,11 +25,11 @@ import org.springframework.stereotype.Component;
  * @author vlcekmi3
  */
 @Component
-@Path("/a")
+@Path("/jersey")
 public class DefaultService {
     
     @Autowired
-    private UserService userService;
+    private TopicService topicService;
 
     @GET
     @Path("/hello")
@@ -37,5 +37,5 @@ public class DefaultService {
     public String getHello(@DefaultValue("no message") @QueryParam("msg") String msg) {
         return "hello: " + msg;
     }
-    
+
 }

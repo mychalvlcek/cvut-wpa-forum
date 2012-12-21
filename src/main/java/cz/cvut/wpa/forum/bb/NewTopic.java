@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author vlcekmi3
  */
 @Component
-@Scope(value="request")
+@Scope(value="view")
 public class NewTopic {
     
     private Long categoryId;
@@ -40,7 +40,6 @@ public class NewTopic {
     }
     
     public void storeTopic() throws IOException {
-        categoryId = Long.parseLong(FacesUtil.getRequestParameter("category"));
         Long newTopicId = topicService.addTopic(title, user.id(), categoryId);
         FacesUtil.addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Topic", "Byl úspěšně vložen."));
         FacesContext.getCurrentInstance().getExternalContext().redirect("topic.xhtml?id=" + newTopicId + "&new=1");

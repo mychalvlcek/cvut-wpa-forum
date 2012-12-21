@@ -61,10 +61,4 @@ public class TopicServiceImpl extends AbstractDataAccessService implements Topic
         return new TopicDto(t.getId(), t.getTitle(), HibernateTools.getIdentifier(t.getAuthor()), HibernateTools.getIdentifier(t.getCategory()), DtoTransformerHelper.getIdentifiers(t.getPosts()), t.getCreated(), t.getUpdated());
     }
     
-    @Override
-    public PostDto getLastPostFromTopic(Long id) {
-        Post p = genericDao.getByPropertyUnique("topic_id", id, Post.class);
-        return new PostDto(p.getId(), p.getTitle(), p.getContent(), HibernateTools.getIdentifier(p.getAuthor()), HibernateTools.getIdentifier(p.getTopic()), p.getCreated(), p.getUpdated());
-    }
-    
 }

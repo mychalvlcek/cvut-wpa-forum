@@ -9,13 +9,13 @@ import java.util.Date;
 public class MessageDto extends AbstractDto {
     private String title;
     private String content;
-    private Long author;
-    private Long recipient;
+    private UserDto author;
+    private UserDto recipient;
 
     public MessageDto() {
     }
 
-    public MessageDto(Long id, String title, String content, Long author, Long recipient, Date created, Date updated) {
+    public MessageDto(Long id, String title, String content, UserDto author, UserDto recipient, Date created, Date updated) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -41,19 +41,19 @@ public class MessageDto extends AbstractDto {
         this.content = content;
     }
 
-    public Long getAuthor() {
+    public UserDto getAuthor() {
         return author;
     }
 
-    public void setAuthor(Long author) {
+    public void setAuthor(UserDto author) {
         this.author = author;
     }
 
-    public Long getRecipient() {
+    public UserDto getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(Long recipient) {
+    public void setRecipient(UserDto recipient) {
         this.recipient = recipient;
     }
     
